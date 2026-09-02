@@ -1,0 +1,7 @@
+name = "example"
+description = "Replace with one narrow deterministic responsibility."
+tags = ["example"]
+entrypoint = "tool.py"
+test = "test_tool.py"
+deterministic = true
+mutates = false

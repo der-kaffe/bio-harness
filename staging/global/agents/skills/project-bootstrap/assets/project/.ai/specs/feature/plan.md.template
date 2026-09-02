@@ -1,0 +1,5 @@
+# Private implementation plan
+
+For each step record scope, dependency, validation, rollback concern, and completion evidence. Keep steps independently reviewable where practical.
+
+1. UNDEFINED

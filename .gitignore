@@ -1,0 +1,10 @@
+# Local machine snapshots and generated audit state
+/backups/
+/*.before-bootstrap*
+/staging/audit/simulation/
+/staging/audit/config-probe-home/
+
+# Generated language/tool residue
+__pycache__/
+*.pyc
+*.tmp

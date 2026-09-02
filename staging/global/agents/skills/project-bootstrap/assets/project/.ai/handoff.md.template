@@ -1,0 +1,12 @@
+# Private handoff
+
+- Purpose: UNDEFINED
+- Current state: UNDEFINED
+- Accepted decisions: UNDEFINED
+- Risks: UNDEFINED
+- Files: UNDEFINED
+- Validation: NOT_RUN
+- Open questions: UNDEFINED
+- Next action: UNDEFINED
+
+Create only for an actual transfer. Keep routine resumable state in `run_state.md`.

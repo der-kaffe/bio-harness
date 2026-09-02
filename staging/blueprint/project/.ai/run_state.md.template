@@ -1,0 +1,14 @@
+# Private run state
+
+- Updated: YYYY-MM-DDTHH:MM:SSZ
+- Objective: UNDEFINED
+- Status: ACTIVE | BLOCKED | STALE | COMPLETE
+- Completed: UNDEFINED
+- In progress: UNDEFINED
+- Blockers: NONE
+- Relevant files: UNDEFINED
+- Validation: NOT_RUN
+- Working tree: UNKNOWN
+- Next action: UNDEFINED
+
+Keep this short and operational. Verify it against repository reality on resume. It is a checkpoint, not history or shared authority, and must never claim validation that did not run.

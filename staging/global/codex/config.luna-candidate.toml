@@ -1,0 +1,9 @@
+# Optional parent candidate. Do not install before the quality gate is approved.
+model = "gpt-5.6-luna"
+model_provider = "openai"
+model_reasoning_effort = "medium"
+sandbox_mode = "workspace-write"
+approval_policy = "on-request"
+
+[features]
+memories = false

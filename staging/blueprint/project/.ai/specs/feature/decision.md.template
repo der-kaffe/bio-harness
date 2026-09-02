@@ -1,0 +1,11 @@
+# Private decision
+
+- Status: PROPOSED | ACCEPTED | REJECTED | SUPERSEDED
+- Decision owner/source: UNDEFINED
+- Context: UNDEFINED
+- Decision: UNDEFINED
+- Alternatives: UNDEFINED
+- Consequences: UNDEFINED
+- Shared-truth conflict check: NONE | UNDEFINED
+
+An agent may propose but cannot accept a consequential decision without appropriate authority.

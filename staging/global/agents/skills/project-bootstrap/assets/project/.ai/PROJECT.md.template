@@ -1,0 +1,14 @@
+# Private AI project router
+
+This file is personal AI guidance, not team policy. Tracked project instructions, contracts, code, tests, and documentation remain authoritative. Report contradictions; private decisions cannot silently override shared truth.
+
+## Active private context
+
+<!-- List only artifacts that actually exist. Remove unused examples. -->
+- Current work: `run_state.md`
+- Feature SDD: `specs/<feature>/`
+- Tools: `tools/*/tool.toml`
+
+Load only private artifacts relevant to the current task, but do not omit required constraints or evidence to save context. Before generating a non-trivial deterministic helper, search project tool manifests and then global toolbox manifests; match semantics, not names alone.
+
+Private findings remain private unless collaborators genuinely need them. Propose promotion into the repository's existing shared documentation convention and obtain appropriate approval when promotion changes a team or project contract.

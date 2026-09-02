@@ -1,0 +1,9 @@
+# Recurring agent/process mistakes
+
+Record recurring agent or process failures, not ordinary product bugs. Search for a semantically equivalent pattern before adding another entry.
+
+| ID | Pattern | Count | Evidence | Cause | Correction | Prevention | Status |
+|---|---|---:|---|---|---|---|---|
+| MIST-001 | UNDEFINED | 1 | UNDEFINED | UNKNOWN | UNDEFINED | UNDEFINED | OPEN |
+
+Recurrence may justify stronger prevention, but count alone never authorizes automation or policy changes.

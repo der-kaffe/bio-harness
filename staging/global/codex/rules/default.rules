@@ -1,0 +1,8 @@
+# Intentionally empty candidate.
+#
+# Codex 0.152.0 execpolicy governs commands requested outside the sandbox and
+# matches argv prefixes. A small global blacklist was bypassable through valid
+# argv shapes such as absolute executable paths, `git -C`, `terraform -chdir`,
+# and unsplittable shell wrappers, while broad prompts duplicated ordinary
+# sandbox approvals. Stack- and target-specific rules should be introduced only
+# where a concrete project or managed requirement can define complete patterns.

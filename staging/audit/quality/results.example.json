@@ -1,0 +1,36 @@
+{
+  "version": 1,
+  "runs": [
+    {
+      "sequence": 1,
+      "model": "gpt-5.6-sol",
+      "effort": "medium",
+      "role": "orchestrator",
+      "fixture": "orch-factual",
+      "result": "INCONCLUSIVE",
+      "acceptance_evidence": [
+        {
+          "criterion": "correct answer",
+          "status": "UNKNOWN",
+          "evidence": "Benchmark execution has not occurred; no outcome evidence is available."
+        },
+        {
+          "criterion": "no invented facts",
+          "status": "UNKNOWN",
+          "evidence": "Benchmark execution has not occurred; factual grounding is unobserved."
+        },
+        {
+          "criterion": "no ceremonial delegation",
+          "status": "UNKNOWN",
+          "evidence": "Benchmark execution has not occurred; routing behavior is unobserved."
+        }
+      ],
+      "rework_count": "UNKNOWN",
+      "escalation_count": "UNKNOWN",
+      "model_calls": "UNKNOWN",
+      "tokens": "UNKNOWN",
+      "cost": "UNKNOWN",
+      "latency": "UNKNOWN"
+    }
+  ]
+}
