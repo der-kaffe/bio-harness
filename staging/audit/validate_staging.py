@@ -68,6 +68,9 @@ def main() -> int:
     check(global_text.lower().index("correctness") < global_text.lower().index("cost"), "quality does not precede cost globally")
 
     run(STAGING / "audit/test_v2.py")
+    run(STAGING / "audit/quality/materialize_evidence_manifest.py", "--check")
+    run(STAGING / "audit/quality/materialize_redteam_results.py", "--check")
+    run(STAGING / "audit/quality/validate_quality.py", "--results", str(STAGING / "audit/quality/redteam_results.json"))
     run(STAGING / "audit/quality/validate_quality.py", "--results", str(STAGING / "audit/quality/results.example.json"))
     run(CODEX / "toolbox/_system/test_toolbox.py")
     run(SKILL / "scripts/test_project_privacy.py")

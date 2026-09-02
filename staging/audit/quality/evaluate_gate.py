@@ -13,7 +13,7 @@ import re
 import validate_quality
 
 ROLE_ASSIGNMENTS = {
-    "researcher": ("gpt-5.6-luna", "low"),
+    "researcher": ("gpt-5.6-luna", "medium"),
     "quick-implementer": ("gpt-5.6-luna", "low"),
     "implementer": ("gpt-5.6-luna", "medium"),
     "validator": ("gpt-5.6-luna", "low"),
@@ -35,8 +35,8 @@ def candidate_output_digest(path: Path) -> str:
     return hashlib.sha256(pattern.sub('model = "gpt-5.6-luna"', content).encode()).hexdigest()
 
 
-def evaluate(data: dict[str, object], fixtures: dict[str, dict[str, object]]) -> dict[str, object]:
-    validate_quality.validate_results(data, fixtures)
+def evaluate(data: dict[str, object], fixtures: dict[str, dict[str, object]], trial_ids: set[str] | None = None) -> dict[str, object]:
+    validate_quality.validate_results(data, fixtures, trial_ids)
     runs = data["runs"]
     orchestrator_ids = {fixture for fixture, contract in fixtures.items() if contract["role"] == "orchestrator"}
     controls = {run["fixture"]: run for run in runs if run["role"] == "orchestrator" and run["model"] == "gpt-5.6-sol" and run["effort"] == "medium"}
@@ -91,7 +91,12 @@ def main() -> int:
     try:
         fixture_data = validate_quality.load(args.fixtures)
         fixtures = validate_quality.validate_fixtures(fixture_data)
-        result = evaluate(validate_quality.load(args.results), fixtures)
+        result_data = validate_quality.load(args.results)
+        manifest_path = args.results.with_name("evidence_manifest.json")
+        if result_data.get("evidence_manifest_sha256") != digest(manifest_path):
+            raise ValueError("results do not bind current evidence manifest")
+        trial_ids = validate_quality.validate_evidence_manifest(validate_quality.load(manifest_path), manifest_path.parent)
+        result = evaluate(result_data, fixtures, trial_ids)
         if args.receipt:
             if result["decision"] != "ELIGIBLE_FOR_HUMAN_APPROVAL":
                 raise ValueError("a gate receipt is emitted only for an eligible comparison")
@@ -108,6 +113,8 @@ def main() -> int:
                 "fixtures_path": str(args.fixtures.resolve()),
                 "results_sha256": digest(args.results),
                 "results_path": str(args.results.resolve()),
+                "evidence_manifest_sha256": digest(manifest_path),
+                "evidence_manifest_path": str(manifest_path.resolve()),
                 "evaluator_sha256": digest(Path(__file__)),
                 "evaluator_path": str(Path(__file__).resolve()),
                 "validator_sha256": digest(Path(validate_quality.__file__)),

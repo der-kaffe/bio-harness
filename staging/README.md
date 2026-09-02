@@ -1,6 +1,6 @@
 # Unified Harness V2 staging
 
-This tree is a reviewable, non-installed candidate integrating three systems:
+This tree is the source of the validated V2 hybrid integrating three systems:
 
 ```mermaid
 flowchart TD
@@ -17,9 +17,9 @@ flowchart TD
     P -. cannot override .-> H
 ```
 
-## Installable control
+## Validated control
 
-The staged installable parent remains GPT-5.6 Sol with medium reasoning. Luna/medium is an inert future candidate and has a separate quality-gated migration path. General V2 installation never changes `config.toml`.
+The installed and staged parent remains GPT-5.6 Sol with medium reasoning. Luna/medium failed the parent quality gate and remains an inert, blocked candidate with a separate migration path. General V2 installation never changes `config.toml`.
 
 ## Private project workspace
 
@@ -31,6 +31,6 @@ The standard-library toolbox utility discovers manifests without executing tools
 
 ## Validation and migration
 
-`audit/validate_staging.py` runs deterministic infrastructure and policy tests without model calls. `audit/quality` defines outcome-based fixtures for the later Sol-control/Luna-candidate red team. `migration/v2_migrate.py` provides hash-aware general installation/rollback; `migration/migrate_parent_model.py` is a separate quality-gated optional model change.
+`audit/validate_staging.py` runs deterministic infrastructure and policy tests without model calls. `audit/quality` retains the completed outcome-based Sol-control/Luna-candidate red team. Its result kept the Sol/medium parent, raised researcher to Luna/medium, and tightened the Luna/low validator contract. `migration/v2_migrate.py` provides hash-aware general installation/rollback; `migration/migrate_parent_model.py` is a separate, currently blocked model change.
 
-Nothing in staging is installed merely by existing. Active homes, projects, Git excludes, and Git configuration remain outside this candidate.
+Nothing in staging is installed merely by existing. The local active installation was promoted through the migration and verified separately; projects, Git excludes, and future source edits remain unaffected until explicitly adopted or installed.

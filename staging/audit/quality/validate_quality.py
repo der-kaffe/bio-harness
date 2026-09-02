@@ -4,6 +4,7 @@
 from __future__ import annotations
 
 import argparse
+import hashlib
 import json
 from pathlib import Path
 import sys
@@ -37,7 +38,24 @@ def validate_fixtures(data: object) -> dict[str, dict[str, object]]:
     return fixtures
 
 
-def validate_results(data: object, fixtures: dict[str, dict[str, object]]) -> None:
+def validate_evidence_manifest(data: object, base: Path) -> set[str]:
+    if (not isinstance(data, dict) or data.get("version") != 1
+            or not isinstance(data.get("trial_ids"), list)
+            or not isinstance(data.get("artifacts"), list)):
+        raise ValueError("invalid evidence manifest")
+    trial_ids = data["trial_ids"]
+    if not trial_ids or len(set(trial_ids)) != len(trial_ids) or not all(isinstance(item, str) and item for item in trial_ids):
+        raise ValueError("invalid evidence trial ids")
+    for artifact in data["artifacts"]:
+        if not isinstance(artifact, dict) or set(artifact) != {"path", "sha256"}:
+            raise ValueError("invalid evidence artifact")
+        path = (base / artifact["path"]).resolve()
+        if not path.is_file() or hashlib.sha256(path.read_bytes()).hexdigest() != artifact["sha256"]:
+            raise ValueError(f"stale evidence artifact: {artifact['path']}")
+    return set(trial_ids)
+
+
+def validate_results(data: object, fixtures: dict[str, dict[str, object]], trial_ids: set[str] | None = None) -> None:
     if not isinstance(data, dict) or data.get("version") != 1 or not isinstance(data.get("runs"), list):
         raise ValueError("invalid result envelope")
     control_sequence: dict[str, int] = {}
@@ -73,6 +91,10 @@ def validate_results(data: object, fixtures: dict[str, dict[str, object]]) -> No
                 raise ValueError("invalid or placeholder acceptance evidence")
             if item["criterion"] in observed:
                 raise ValueError("duplicate acceptance criterion evidence")
+            if trial_ids is not None:
+                marker = item["evidence"].split(";", 1)[0]
+                if not marker.startswith("trial=") or marker[6:] not in trial_ids:
+                    raise ValueError(f"unknown trial evidence reference: {marker}")
             observed[item["criterion"]] = item["status"]
         if set(observed) != set(expected_criteria):
             raise ValueError(f"acceptance evidence does not cover fixture contract: {run['fixture']}")
@@ -100,7 +122,14 @@ def main() -> int:
     try:
         fixtures = validate_fixtures(load(args.fixtures))
         if args.results:
-            validate_results(load(args.results), fixtures)
+            results = load(args.results)
+            trial_ids = None
+            if isinstance(results, dict) and "evidence_manifest_sha256" in results:
+                manifest_path = args.results.with_name("evidence_manifest.json")
+                if hashlib.sha256(manifest_path.read_bytes()).hexdigest() != results["evidence_manifest_sha256"]:
+                    raise ValueError("results do not bind current evidence manifest")
+                trial_ids = validate_evidence_manifest(load(manifest_path), manifest_path.parent)
+            validate_results(results, fixtures, trial_ids)
     except (OSError, json.JSONDecodeError, ValueError) as error:
         print(f"ERROR: {error}")
         return 1

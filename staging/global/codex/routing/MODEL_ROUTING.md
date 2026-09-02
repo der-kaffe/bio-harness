@@ -14,7 +14,7 @@ Route in this order: correctness, safety, task-required reasoning quality, relia
 
 ## Roles
 
-- `researcher` (Luna/low, read-only): multi-file discovery, tracing, documentation research, and root-cause evidence. No implementation, validation, review, or architecture decisions.
+- `researcher` (Luna/medium, read-only): multi-file discovery, tracing, documentation research, and root-cause evidence. No implementation, validation, review, or architecture decisions.
 - `quick-implementer` (Luna/low): explicit low-risk, tightly bounded changes, usually around one or two files, with one proportionate focused check.
 - `implementer` (Luna/medium): normal features, multi-file fixes, affected tests, and focused repair from validator evidence.
 - `validator` (Luna/low): assigned test, build, lint, or type-check scope; no repairs or source edits.

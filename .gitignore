@@ -3,6 +3,7 @@
 /*.before-bootstrap*
 /staging/audit/simulation/
 /staging/audit/config-probe-home/
+/staging/audit/install-*-baseline.json
 
 # Generated language/tool residue
 __pycache__/

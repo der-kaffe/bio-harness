@@ -64,6 +64,14 @@ def make_tool(root: Path, name: str, description: str = "deterministic sample") 
 def make_quality_receipt(root: Path, control_config: Path) -> tuple[Path, str]:
     fixture_path = STAGING / "audit/quality/fixtures.json"
     fixtures = quality_validate.validate_fixtures(quality_validate.load(fixture_path))
+    evidence = root / "synthetic-evidence.txt"
+    evidence.write_text("deterministic eligible receipt fixture\n", encoding="utf-8")
+    manifest = root / "evidence_manifest.json"
+    manifest.write_text(json.dumps({
+        "version": 1,
+        "trial_ids": ["SYNTHETIC"],
+        "artifacts": [{"path": evidence.name, "sha256": hashlib.sha256(evidence.read_bytes()).hexdigest()}],
+    }, sort_keys=True, separators=(",", ":")), encoding="utf-8")
     runs: list[dict[str, object]] = []
     sequence = 0
     for model in ("gpt-5.6-sol", "gpt-5.6-luna"):
@@ -71,9 +79,9 @@ def make_quality_receipt(root: Path, control_config: Path) -> tuple[Path, str]:
             if fixture["role"] != "orchestrator":
                 continue
             sequence += 1
-            runs.append({"sequence": sequence, "model": model, "effort": "medium", "role": "orchestrator", "fixture": fixture_id, "result": "PASS", "acceptance_evidence": [{"criterion": criterion, "status": "PASS", "evidence": f"Observed passing outcome for {criterion}."} for criterion in fixture["acceptance"]], "rework_count": 0, "escalation_count": 0, "model_calls": 1, "tokens": "UNKNOWN", "cost": "UNKNOWN", "latency": "UNKNOWN"})
+            runs.append({"sequence": sequence, "model": model, "effort": "medium", "role": "orchestrator", "fixture": fixture_id, "result": "PASS", "acceptance_evidence": [{"criterion": criterion, "status": "PASS", "evidence": f"trial=SYNTHETIC; observed passing outcome for {criterion}."} for criterion in fixture["acceptance"]], "rework_count": 0, "escalation_count": 0, "model_calls": 1, "tokens": "UNKNOWN", "cost": "UNKNOWN", "latency": "UNKNOWN"})
     results = root / "quality-results.json"
-    results.write_text(json.dumps({"version": 1, "runs": runs}), encoding="utf-8")
+    results.write_text(json.dumps({"version": 1, "evidence_manifest_sha256": hashlib.sha256(manifest.read_bytes()).hexdigest(), "runs": runs}), encoding="utf-8")
     receipt = root / "gate-receipt.json"
     command = [sys.executable, "-B", str(STAGING / "audit/quality/evaluate_gate.py"), str(results), "--fixtures", str(fixture_path), "--control-config", str(control_config), "--candidate-config", str(CODEX / "config.luna-candidate.toml"), "--receipt", str(receipt)]
     completed = subprocess.run(command, text=True, stdout=subprocess.PIPE, stderr=subprocess.STDOUT, check=False)

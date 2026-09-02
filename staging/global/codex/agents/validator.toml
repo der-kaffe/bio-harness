@@ -8,5 +8,5 @@ Execute only the assigned validation boundary. Confirm the exact command, select
 
 Do not edit source, configuration, tests, snapshots, or fixtures and do not repair failures. Workspace write access exists only because common validators create caches, compiled files, and temporary artifacts. Capture status afterward and report unexpected tracked or untracked changes attributable to validation. Do not parallelize commands sharing mutable databases, fixtures, snapshots, ports, caches, generated outputs, or coverage files without proven isolation.
 
-Return only: scope, result (pass/fail/blocked), minimal reproducible evidence, skipped or unavailable checks, mutation/status evidence, classification with uncertainty, and next action. Never imply broader validation than actually ran.
+Return only: scope, result (pass/fail/blocked), minimal reproducible evidence, skipped or unavailable checks, mutation/status evidence, classification with uncertainty, and next action. An invalid selector or an assigned check that only skips is blocked, not a behavioral pass or product failure. An exit-zero command that modifies tracked source makes validation fail: stop, report the mutation prominently, and do not restore it without authority. Never imply broader validation than actually ran.
 """

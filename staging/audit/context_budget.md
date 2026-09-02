@@ -5,7 +5,7 @@ Measured on 2026-09-02 using whitespace-delimited words and UTF-8 bytes. These a
 | Artifact | Loading class | Words | Bytes |
 |---|---|---:|---:|
 | Global `AGENTS.md` | ALWAYS-LOADED | 294 | 2,310 |
-| `routing/MODEL_ROUTING.md` | ON-DEMAND | 549 | 4,313 |
+| `routing/MODEL_ROUTING.md` | ON-DEMAND | 549 | 4,316 |
 | Private `.ai/PROJECT.md` template | ALWAYS-LOADED only in activated project | 129 | 968 |
 | Example `tool.toml` | ON-DEMAND manifest | 26 | 188 |
 | project-bootstrap `SKILL.md` | ROLE-LOADED | 323 | 2,671 |
@@ -23,7 +23,7 @@ Agent instruction payloads load only with their roles:
 | researcher | ROLE-LOADED | 98 | 754 |
 | quick-implementer | ROLE-LOADED | 107 | 769 |
 | implementer | ROLE-LOADED | 126 | 925 |
-| validator | ROLE-LOADED | 132 | 1,037 |
+| validator | ROLE-LOADED | 173 | 1,301 |
 | planner | ROLE-LOADED | 108 | 872 |
 | reviewer | ROLE-LOADED | 109 | 878 |
 

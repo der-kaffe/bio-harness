@@ -76,12 +76,12 @@ def validate_gate(path: Path, approved_hash: str) -> dict[str, object]:
     if digest(path) != approved_hash:
         raise ValueError("approved gate hash does not match receipt")
     receipt = json.loads(path.read_text(encoding="utf-8"))
-    required = {"version", "decision", "control", "parent_candidate", "fixtures_sha256", "fixtures_path", "results_sha256", "results_path", "evaluator_sha256", "evaluator_path", "validator_sha256", "validator_path", "control_config_sha256", "control_config_path", "candidate_output_sha256", "candidate_config_sha256"}
+    required = {"version", "decision", "control", "parent_candidate", "fixtures_sha256", "fixtures_path", "results_sha256", "results_path", "evidence_manifest_sha256", "evidence_manifest_path", "evaluator_sha256", "evaluator_path", "validator_sha256", "validator_path", "control_config_sha256", "control_config_path", "candidate_output_sha256", "candidate_config_sha256"}
     if set(receipt) != required or receipt["version"] != 1:
         raise ValueError("invalid quality-gate receipt")
     if receipt["decision"] != "ELIGIBLE_FOR_HUMAN_APPROVAL" or receipt["control"] != "gpt-5.6-sol/medium" or receipt["parent_candidate"] != "gpt-5.6-luna/medium":
         raise ValueError("quality-gate receipt does not authorize this transition")
-    for field in ("fixtures_sha256", "results_sha256", "evaluator_sha256", "validator_sha256", "control_config_sha256", "candidate_output_sha256", "candidate_config_sha256"):
+    for field in ("fixtures_sha256", "results_sha256", "evidence_manifest_sha256", "evaluator_sha256", "validator_sha256", "control_config_sha256", "candidate_output_sha256", "candidate_config_sha256"):
         if not isinstance(receipt[field], str) or not re.fullmatch(r"[0-9a-f]{64}", receipt[field]):
             raise ValueError(f"invalid receipt digest: {field}")
     if receipt["candidate_config_sha256"] != digest(CANDIDATE_CONFIG):
@@ -90,12 +90,13 @@ def validate_gate(path: Path, approved_hash: str) -> dict[str, object]:
     validator = Path(receipt["validator_path"])
     fixtures = Path(receipt["fixtures_path"])
     results = Path(receipt["results_path"])
+    evidence_manifest = Path(receipt["evidence_manifest_path"])
     control_config = Path(receipt["control_config_path"])
     if evaluator.resolve() != (STAGING / "audit/quality/evaluate_gate.py").resolve():
         raise ValueError("receipt names an untrusted evaluator")
     if validator.resolve() != (STAGING / "audit/quality/validate_quality.py").resolve():
         raise ValueError("receipt names an untrusted result validator")
-    for field, artifact in (("evaluator_sha256", evaluator), ("validator_sha256", validator), ("fixtures_sha256", fixtures), ("results_sha256", results), ("control_config_sha256", control_config)):
+    for field, artifact in (("evaluator_sha256", evaluator), ("validator_sha256", validator), ("fixtures_sha256", fixtures), ("results_sha256", results), ("evidence_manifest_sha256", evidence_manifest), ("control_config_sha256", control_config)):
         if not artifact.is_file() or digest(artifact) != receipt[field]:
             raise ValueError(f"quality evidence drift: {field}")
     rerun = subprocess.run([sys.executable, "-B", str(evaluator), str(results), "--fixtures", str(fixtures)], text=True, stdout=subprocess.PIPE, stderr=subprocess.STDOUT, check=False)
