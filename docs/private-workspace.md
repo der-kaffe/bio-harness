@@ -23,15 +23,14 @@ Esto es un menú. Un repositorio trivial puede no recibir nada; otro quizá sól
 
 ```mermaid
 flowchart TD
-    U[Instrucción humana explícita actual] --> D[Decisión]
-    T[Contrato del proyecto o equipo con seguimiento] --> D
-    A[Plan privado compatible y aceptado] --> D
-    E[Evidencia de implementación] --> D
-    A -. contradicción visible .-> T
-    T -. prevalece sobre estado privado en conflicto .-> A
+    U["INSTRUCCIÓN HUMANA EXPLÍCITA"] --> T["FUENTE COMPARTIDA APLICABLE<br/>AGENTS · contratos · código · tests · docs"]
+    T --> D["TRABAJO DEL PROYECTO"]
+    P["GUÍA PRIVADA .ai"] -. "complementa" .-> D
+    P -. "si contradice, se informa" .-> T
+    E["EVIDENCIA DEL REPOSITORIO<br/>demuestra qué existe"] --> D
 ```
 
-La evidencia del repositorio establece la realidad actual; las instrucciones y contratos aceptados que correspondan establecen el comportamiento deseado. Las contradicciones se informan, no se resuelven silenciosamente a favor de `.ai`.
+La instrucción humana actual y la fuente compartida con seguimiento más cercana y aplicable gobiernan el objetivo. La evidencia del repositorio establece la realidad actual, pero no redefine por sí sola el contrato deseado. `.ai` complementa esas fuentes; las contradicciones se informan y no se resuelven silenciosamente a favor del estado privado.
 
 ## Privacidad local de Git
 
@@ -49,3 +48,26 @@ Las rutas privadas aparentes que tengan seguimiento son un conflicto, no algo qu
 ## Promoción
 
 Cuando el trabajo privado revela algo que los colaboradores necesitan, propón su promoción: explica la necesidad compartida, usa la convención de documentación existente en el repositorio y obtén aprobación cuando el cambio afecte un contrato del equipo o producto. El SDD privado nunca se copia automáticamente a documentación con seguimiento.
+
+```mermaid
+flowchart LR
+    F["PRIVATE FINDING"] --> P["PROPOSE PROMOTION"]
+    P --> D["HUMAN / TEAM DECISION"]
+    D -->|Aceptada| S["SHARED DOCUMENTATION"]
+    D -->|No aceptada| R["Permanece privada"]
+```
+
+La promoción es una decisión explícita, no una consecuencia automática de que el hallazgo parezca útil.
+
+## Escalamiento de errores recurrentes
+
+```mermaid
+flowchart LR
+    F["FALLO RECURRENTE"] --> I["prompt / instruction"]
+    I --> M["memory / skill"]
+    M --> T["script / tool"]
+    T --> C["test / static check"]
+    C --> E["hook / CI / policy"]
+```
+
+No todos los fallos recorren toda la cadena: el control se elige según la causa, la repetibilidad y el riesgo. `memory` es sólo una opción futura y sigue deshabilitada en la configuración V2 actual. La repetición puede justificar automatizar la **prevención**, pero nunca concede autoridad automática para ejecutar acciones peligrosas.

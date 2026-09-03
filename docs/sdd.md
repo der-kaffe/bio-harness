@@ -2,11 +2,33 @@
 
 El desarrollo basado en especificaciones (SDD) hace explícito el razonamiento duradero cuando eso mejora la corrección. Es proporcional, no un pipeline obligatorio de documentos.
 
-```text
-Necesidad → Especificación → Diseño → Plan → Implementación → Validación
+```mermaid
+flowchart LR
+    N["Necesidad"] --> S["Especificación"]
+    S --> D["Diseño"]
+    D --> P["Plan"]
+    P --> I["Implementación"]
+    I --> V["Validación"]
 ```
 
-Cualquier etapa puede comprimirse u omitirse cuando no beneficie a la tarea.
+Este es un ciclo conceptual: cualquier etapa puede comprimirse u omitirse cuando no beneficie a la tarea, y una etapa no implica necesariamente crear un archivo.
+
+## Selección proporcional
+
+```mermaid
+flowchart TD
+    T["TAREA"] --> C{"Clasificar alcance y riesgo"}
+    C -->|TRIVIAL| TR["Cambio directo<br/>+ comprobación enfocada"]
+    C -->|SMALL| SM["Implementación + tests<br/>plan breve si ayuda"]
+    C -->|MEDIUM| ME["Spec duradera ligera<br/>+ plan proporcional"]
+    C -->|LARGE / RISKY| LR["Requisitos y decisiones necesarias"]
+    LR --> DE["Diseño"]
+    DE --> PL["Plan revisable"]
+    PL --> IM["Implementación"]
+    IM --> VA["Validación"]
+```
+
+La clasificación depende del riesgo y la durabilidad del contrato, no sólo del número de archivos.
 
 | Clase de tarea | Tratamiento habitual |
 |---|---|

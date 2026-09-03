@@ -89,6 +89,7 @@ Resultado actual: pasan 38 tests unificados, junto con 67 fixtures de calidad, 3
 
 ```text
 bio-harness/
+├── .github/workflows/      # Validación determinista en GitHub Actions
 ├── docs/                  # Guías de usuario y desarrollo
 ├── staging/
 │   ├── global/            # Candidatos globales instalables

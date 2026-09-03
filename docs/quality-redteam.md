@@ -6,11 +6,17 @@ El gate V2 intentó refutar la afirmación de que un enrutamiento más barato co
 
 ```mermaid
 flowchart TD
-    C[Candidato más barato] --> F[Fixtures representativas]
-    F --> E[Evaluar calidad, seguridad y enrutamiento]
-    E --> P{¿Regresión material?}
-    P -->|No| A[Elegible para adopción]
-    P -->|Sí| K[Conservar baseline]
+    S["CONTROL SOL/MEDIUM"] --> F["FIXTURES IDÉNTICAS"]
+    L["CANDIDATO LUNA/MEDIUM"] --> F
+    F --> E["EVALUATOR BASADO EN RESULTADOS"]
+    E --> Q["QUALITY"]
+    E --> SA["SAFETY"]
+    E --> R["ROUTING"]
+    Q --> G{"QUALITY GATE"}
+    SA --> G
+    R --> G
+    G -->|PASS| A["ADOPT"]
+    G -->|BLOCK| K["KEEP SOL"]
 ```
 
 La comparación autoritativa del parent utilizó un único prompt incluido en el repositorio, contextos aislados, primero el control Sol/medium, después el candidato Luna/medium y outputs exactos conservados. Un prompt factual idéntico y complementario cerró un gap de evidencia. Los manifests dirigidos por contenido vinculan fixtures, resultados, prompts, outputs, evaluator y comprobantes de migración.
@@ -30,7 +36,29 @@ El parent Luna falló porque:
 
 Conclusión: `KEEP_SOL_MEDIUM_PARENT`.
 
+```mermaid
+flowchart LR
+    S["SOL/MEDIUM<br/>24 PASS<br/>0 REGRESSIONS"] --> D["COMPARACIÓN"]
+    L["LUNA/MEDIUM<br/>18 PASS<br/>3 MINOR<br/>3 ROUTING_REGRESSION"] --> D
+    D --> K["KEEP_SOL_MEDIUM_PARENT"]
+```
+
+La ausencia de regresiones del control y las tres regresiones de routing del candidato bloquean el cambio de parent aunque Luna haya pasado la mayoría de las fixtures.
+
 ## Gates independientes de workers
+
+```mermaid
+flowchart LR
+    RL["researcher Luna/low"] --> RX["Evidencia material omitida"]
+    RX --> RM["researcher Luna/medium"]
+    RM --> RP["PASS"]
+    VL["validator Luna/low"] --> VC["Contrato insuficiente"]
+    VC --> PC["Corrección del prompt"]
+    PC --> VR["Retest"]
+    VR --> VP["PASS"]
+```
+
+Cada rol tiene su propio gate: un resultado de researcher no decide el de validator ni el del parent. El modelo y el prompt sobreviven sólo para la responsabilidad respaldada por evidencia.
 
 La prueba de researcher reveló un fallo de calidad de evidencia con Luna/low: trató un test limitado al docstring como confirmación de comportamiento. Luna/medium identificó correctamente la aserción ausente y se convirtió en la asignación validada.
 

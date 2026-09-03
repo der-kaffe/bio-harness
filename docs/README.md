@@ -2,6 +2,19 @@
 
 Las guías dirigidas a personas explican la arquitectura V2 validada actual. Los experimentos detallados, comprobantes, fixtures y evidencia histórica permanecen bajo [`staging/audit/`](../staging/audit/README.md).
 
+## Mapas visuales
+
+- [Arquitectura general, límites y ciclo de solicitud](architecture.md)
+- [Decisión de routing, responsabilidades y paralelismo](model-routing.md)
+- [Workspace privado frente a verdad compartida](private-workspace.md)
+- [Bootstrap adaptativo de proyectos](project-bootstrap.md)
+- [SDD proporcional](sdd.md)
+- [Descubrimiento y seguridad de la toolbox](toolbox.md)
+- [Human gates](safety.md)
+- [Quality red-team y gates de workers](quality-redteam.md)
+- [Instalación, activación y rollback](installation.md)
+- [Validación local y CI](development.md)
+
 ## Arquitectura
 
 - [Arquitectura del sistema](architecture.md)

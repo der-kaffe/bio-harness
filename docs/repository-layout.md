@@ -5,6 +5,7 @@ Este repositorio versiona la fuente reproducible del harness y su evidencia. Los
 ```text
 bio-harness/
 ├── README.md
+├── .github/workflows/validate.yml # Validación determinista en push/PR
 ├── docs/                       # Guías de arquitectura y operación dirigidas a usuarios
 ├── staging/
 │   ├── global/
@@ -22,6 +23,7 @@ bio-harness/
 | Área | Clase | Propósito |
 |---|---|---|
 | `README.md`, `docs/` | Documentación | Entry points estables para usuarios y maintainers |
+| `.github/workflows/validate.yml` | CI | Ejecuta invariantes deterministas sin instalar el harness ni llamar modelos |
 | `staging/global/` | Fuente / staging | Archivos candidatos globales instalables; inertes hasta su migración |
 | `staging/blueprint/` | Blueprint | Plantillas privadas opcionales del proyecto, nunca política aplicada en bloque |
 | `staging/migration/` | Fuente de migración | Instalación basada en hashes, rollback y cambio de modelo sujeto a gate |

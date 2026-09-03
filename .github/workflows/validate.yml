@@ -1,0 +1,30 @@
+name: Validación determinista
+
+on:
+  push:
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: validate-${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  validate:
+    name: Validar staging
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - name: Obtener el repositorio
+        uses: actions/checkout@v4
+
+      - name: Ejecutar invariantes deterministas
+        run: python3 -B staging/audit/validate_staging.py
+
+      - name: Comprobar whitespace y ausencia de mutaciones
+        run: |
+          git diff --check
+          git diff --exit-code

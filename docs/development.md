@@ -29,6 +29,21 @@ git diff --check
 
 Inspecciona las rutas modificadas y el conjunto exacto en staging. Para documentación, verifica que los enlaces relativos resuelvan y que los fences de Mermaid estén equilibrados. No instales una dependencia sólo para estas comprobaciones ligeras.
 
+## Integración continua
+
+```mermaid
+flowchart TD
+    L["LOCAL CHANGE"] --> V["LOCAL VALIDATION"]
+    V --> P["COMMIT / PUSH"]
+    P --> G["GITHUB ACTIONS"]
+    G --> S["validate_staging.py"]
+    G --> D["git diff --check"]
+    S --> R{"PASS / FAIL"}
+    D --> R
+```
+
+El workflow [`.github/workflows/validate.yml`](../.github/workflows/validate.yml) ejecuta únicamente invariantes deterministas del repositorio y comprueba que la validación no deje mutaciones. No realiza llamadas de pago a modelos, no instala el harness activo y no modifica proyectos reales.
+
 ## Calidad y revisión
 
 Los cambios de modelo o prompt que afecten una asignación aprobada requieren fixtures representativas del rol. Un cambio de parent propuesto requiere primero un control Sol/medium y no puede aprobarse con una regresión de seguridad, una regresión material de enrutamiento sin resolver o una regresión material de calidad repetida. Se comparan los resultados, no la igualdad de la prosa.

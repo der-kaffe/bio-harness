@@ -4,19 +4,26 @@ project-bootstrap no instala un árbol estándar de carpetas. Inspecciona el rep
 
 ```mermaid
 flowchart TD
-    E[Entrar en el proyecto] --> I[Inspeccionar la realidad]
-    I --> T[Leer la verdad con seguimiento]
-    T --> C[Clasificar el estado de IA existente]
-    C --> P[Establecer privacidad local si es seguro]
-    P --> R{¿Es útil un enrutador privado?}
-    R -->|No| A[Activar sólo las necesidades actuales]
-    R -->|Sí| PR[Crear .ai/PROJECT.md]
-    PR --> A
-    A --> S[¿SDD privado?]
-    A --> ST[¿Estado o handoff?]
-    A --> TL[¿Herramienta de proyecto?]
-    A --> AG[¿Enrutamiento acotado de agentes?]
+    E["ENTER REPO"] --> R["Resolver repository root"]
+    R --> I["Inspeccionar instrucciones con seguimiento"]
+    I --> D["Detectar estado de IA / harness existente"]
+    D --> C{"CLASSIFY"}
+    C --> RE["REUSE"]
+    C --> AD["ADAPT"]
+    C --> MP["MIGRATION_PROPOSED"]
+    C --> CO["CONFLICT"]
+    C --> SK["SKIP"]
+    RE --> P["Establecer privacidad local si es seguro"]
+    AD --> P
+    MP --> H["Preview + human gate"]
+    H --> P
+    SK --> P
+    CO --> X["Detener y resolver"]
+    P --> N["Crear sólo artefactos privados necesarios"]
+    N --> W["WORK NORMALLY"]
 ```
+
+No se crea automáticamente el árbol `.ai` completo. `SKIP` sigue siendo el valor predeterminado; `CONFLICT` detiene la adopción y `MIGRATION_PROPOSED` no avanza sin preview y aprobación.
 
 ## Clasificación
 
