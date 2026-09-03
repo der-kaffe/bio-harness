@@ -1,17 +1,17 @@
-# Private workspace activation
+# Activación del workspace privado
 
-Classify existing and proposed paths as `REUSE`, `ADAPT`, `MIGRATION_PROPOSED`, `CONFLICT`, or `SKIP`. Moving or removing an older layout requires explicit approval.
+Clasifica las rutas existentes y propuestas como `REUSE`, `ADAPT`, `MIGRATION_PROPOSED`, `CONFLICT` o `SKIP`. Mover o eliminar un layout antiguo requiere aprobación explícita.
 
-| Artifact | Activate only when |
+| Artefacto | Activar sólo cuando |
 |---|---|
-| `.ai/PROJECT.md` | Private routing materially helps; keep it a small map. |
-| `.ai/run_state.md` | Work spans sessions and Git/issues do not provide a sufficient checkpoint. |
-| `.ai/handoff.md` | A real transfer is occurring. |
-| `.ai/mistakes.md` | A substantially equivalent agent/process failure recurs. |
-| `.ai/audit/` | A bounded audit compares expected and current evidence. |
-| `.ai/progress/` | Significant conclusions are not already clear from Git/issues. |
-| `.ai/specs/<feature>/` | Ambiguity, risk, or durability warrants private SDD. |
-| `.ai/state/` | Structured private operational state has a defined owner and lifecycle. |
-| `.ai/tools/<name>/` | Reusable deterministic mechanical work passes the extraction heuristic. |
+| `.ai/PROJECT.md` | El enrutamiento privado aporta una ayuda material; mantenlo como un mapa pequeño. |
+| `.ai/run_state.md` | El trabajo abarca varias sesiones y Git/issues no proporcionan un checkpoint suficiente. |
+| `.ai/handoff.md` | Se está produciendo una transferencia real. |
+| `.ai/mistakes.md` | Reaparece un fallo sustancialmente equivalente del agente/proceso. |
+| `.ai/audit/` | Una auditoría acotada compara la evidencia esperada con la actual. |
+| `.ai/progress/` | Las conclusiones relevantes aún no quedan claras en Git/issues. |
+| `.ai/specs/<feature>/` | La ambigüedad, el riesgo o la durabilidad justifican SDD privado. |
+| `.ai/state/` | El estado operativo privado estructurado tiene un responsable y un ciclo de vida definidos. |
+| `.ai/tools/<name>/` | El trabajo mecánico determinista reutilizable supera la heurística de extracción. |
 
-Default to `SKIP`. Existing root `ai/`, `specs/`, `.agents/`, `.codex/`, or `AGENTS.md` may be shared, private, or legacy; inspect tracking and authority before classifying them.
+Usa `SKIP` de forma predeterminada. Los elementos existentes `ai/`, `specs/`, `.agents/`, `.codex/` o `AGENTS.md` en el root pueden ser compartidos, privados o legacy; inspecciona su seguimiento y autoridad antes de clasificarlos.

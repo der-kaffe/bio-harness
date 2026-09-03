@@ -1,43 +1,43 @@
-# bio-harness documentation
+# Documentación de bio-harness
 
-User-facing guides explain the current validated V2 architecture. Detailed experiments, receipts, fixtures, and historical evidence remain under [`staging/audit/`](../staging/audit/README.md).
+Las guías dirigidas a personas explican la arquitectura V2 validada actual. Los experimentos detallados, comprobantes, fixtures y evidencia histórica permanecen bajo [`staging/audit/`](../staging/audit/README.md).
 
-## Architecture
+## Arquitectura
 
-- [System architecture](architecture.md)
-- [Repository layout](repository-layout.md)
+- [Arquitectura del sistema](architecture.md)
+- [Estructura del repositorio](repository-layout.md)
 
-## Model routing
+## Enrutamiento de modelos
 
-- [Quality-first model routing](model-routing.md)
+- [Enrutamiento de modelos que prioriza la calidad](model-routing.md)
 - [Quality red-team](quality-redteam.md)
 
-## Projects
+## Proyectos
 
-- [Private `.ai` workspace](private-workspace.md)
-- [Adaptive project bootstrap](project-bootstrap.md)
-- [Proportional specification-driven development](sdd.md)
+- [Workspace privado `.ai`](private-workspace.md)
+- [Bootstrap adaptativo de proyectos](project-bootstrap.md)
+- [Desarrollo proporcional basado en especificaciones](sdd.md)
 
-## Tools
+## Herramientas
 
-- [Reusable deterministic toolbox](toolbox.md)
+- [Toolbox determinista reutilizable](toolbox.md)
 
-## Safety
+## Seguridad
 
-- [Authority and human gates](safety.md)
+- [Autoridad y human gates](safety.md)
 
-## Installation
+## Instalación
 
-- [Installation and rollback](installation.md)
+- [Instalación y rollback](installation.md)
 
-## Development
+## Desarrollo
 
-- [Source changes and validation](development.md)
+- [Cambios en la fuente y validación](development.md)
 
-## Audit evidence
+## Evidencia de auditoría
 
-- [Unified staging validation](../staging/VALIDATION.md)
-- [Quality framework](../staging/audit/quality/README.md)
-- [Quality red-team evidence](../staging/audit/quality/REDTEAM_REPORT.md)
-- [Hybrid installation audit](../staging/audit/HARNESS_V2_HYBRID_INSTALL_20260902T231047Z.md)
-- [Pinned upstream provenance](../staging/audit/upstream_provenance.md)
+- [Validación unificada de staging](../staging/VALIDATION.md)
+- [Framework de calidad](../staging/audit/quality/README.md)
+- [Evidencia del quality red-team](../staging/audit/quality/REDTEAM_REPORT.md)
+- [Auditoría de instalación híbrida](../staging/audit/HARNESS_V2_HYBRID_INSTALL_20260902T231047Z.md)
+- [Procedencia upstream fijada](../staging/audit/upstream_provenance.md)

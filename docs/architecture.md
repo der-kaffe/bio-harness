@@ -1,50 +1,50 @@
-# Architecture
+# Arquitectura
 
-bio-harness separates orchestration, deterministic mechanics, bounded model work, private project context, and shared project authority. The runtime is global; project methodology remains private unless deliberately promoted.
+bio-harness separa la orquestación, la mecánica determinista, el trabajo acotado de los modelos, el contexto privado del proyecto y la autoridad compartida del proyecto. El runtime es global; la metodología del proyecto permanece privada salvo que se promueva deliberadamente.
 
-## Execution architecture
+## Arquitectura de ejecución
 
 ```mermaid
 flowchart TD
-    U[User or task] --> O[Sol/medium orchestrator]
-    O --> A{Assess requirements, risk, authority, quality}
-    A --> T[Validated deterministic tool]
-    A --> D[Direct trivial work]
-    A --> W[Luna bounded workers]
-    A --> P[Sol/medium planner]
-    A --> R[Sol/low reviewer]
-    W --> V[Luna/low validator]
+    U[Usuario o tarea] --> O[Orquestador Sol/medium]
+    O --> A{Evaluar requisitos, riesgo, autoridad y calidad}
+    A --> T[Herramienta determinista validada]
+    A --> D[Trabajo trivial directo]
+    A --> W[Workers Luna acotados]
+    A --> P[Planner Sol/medium]
+    A --> R[Reviewer Sol/low]
+    W --> V[Validator Luna/low]
     P --> W
     R --> O
     V --> O
-    O --> F[Integrated evidence-based result]
+    O --> F[Resultado integrado basado en evidencia]
 ```
 
-The orchestrator owns interpretation, routing, integration, human gates, and the final claim. It does not delegate ceremonially. Premium reasoning is selected before execution when predicted architecture, migration, durable-data, security, concurrency, destructive, or public-contract risk warrants it.
+El orquestador es responsable de la interpretación, el enrutamiento, la integración, los human gates y la afirmación final. No delega por ceremonia. El razonamiento premium se selecciona antes de ejecutar cuando el riesgo previsto de arquitectura, migración, datos duraderos, seguridad, concurrencia, destrucción o contrato público lo justifica.
 
-## State and authority
+## Estado y autoridad
 
 ```mermaid
 flowchart LR
-    S[Source repository] --> I[Validated installer]
-    I --> G[Global runtime<br/>AGENTS, routing, agents, toolbox, skill]
-    G --> P[Project session]
-    B[Private project blueprint] --> PB[Adaptive project-bootstrap]
-    PB --> AI[Private .ai workspace]
-    H[Tracked project truth] --> P
+    S[Repositorio fuente] --> I[Instalador validado]
+    I --> G[Runtime global<br/>AGENTS, routing, agents, toolbox, skill]
+    G --> P[Sesión del proyecto]
+    B[Blueprint privado de proyecto] --> PB[project-bootstrap adaptativo]
+    PB --> AI[Workspace privado .ai]
+    H[Verdad del proyecto con seguimiento] --> P
     AI --> P
-    AI -. cannot override .-> H
+    AI -. no puede invalidar .-> H
 ```
 
-- **Global runtime**: the small always-loaded agreement, on-demand routing policy, explicit agent definitions, global toolbox support, and project-bootstrap skill.
-- **Blueprint/source**: inert, versioned candidates and templates under `staging/`; their presence does not install or activate them.
-- **Project-private state**: selected `.ai/` artifacts created only after inspecting the project and establishing safe local privacy.
-- **Shared project truth**: tracked instructions, contracts, source, tests, architecture, and team documentation. Contradictions with `.ai` are surfaced and resolved in favor of the applicable shared authority unless a human changes that contract.
+- **Runtime global**: el pequeño acuerdo siempre cargado, la política de enrutamiento bajo demanda, las definiciones explícitas de agentes, el soporte de toolbox global y la skill project-bootstrap.
+- **Blueprint/fuente**: candidatos y plantillas inertes y versionados bajo `staging/`; su presencia no los instala ni activa.
+- **Estado privado del proyecto**: artefactos `.ai/` seleccionados y creados sólo después de inspeccionar el proyecto y establecer privacidad local segura.
+- **Verdad compartida del proyecto**: instrucciones, contratos, código fuente, tests, arquitectura y documentación del equipo con seguimiento. Las contradicciones con `.ai` se hacen visibles y se resuelven a favor de la autoridad compartida aplicable, salvo que un humano cambie ese contrato.
 
-## Progressive disclosure
+## Divulgación progresiva
 
-Global `AGENTS.md` stays small. The project router and detailed model-routing policy are loaded only when applicable. Specs, tool manifests, implementation source, historical audit records, and full diffs are read progressively. Context savings never justify dropping a task-critical requirement or approval boundary.
+El `AGENTS.md` global permanece pequeño. El enrutador del proyecto y la política detallada de enrutamiento de modelos sólo se cargan cuando corresponda. Las specs, los manifests de herramientas, el código fuente de implementación, los registros históricos de auditoría y los diffs completos se leen de forma progresiva. Ahorrar contexto nunca justifica omitir un requisito crítico de la tarea o un límite de aprobación.
 
-## Source-to-runtime lifecycle
+## Ciclo de vida de fuente a runtime
 
-Changes begin in staging, pass deterministic validation and proportionate review, then move through the hash-aware migration. The ordinary V2 installation intentionally leaves `config.toml` unchanged. Parent-model migration is a separate, evidence-bound operation.
+Los cambios comienzan en staging, pasan una validación determinista y una revisión proporcional y después atraviesan la migración basada en hashes. La instalación V2 ordinaria deja deliberadamente `config.toml` sin cambios. La migración del modelo parent es una operación separada y vinculada a evidencia.

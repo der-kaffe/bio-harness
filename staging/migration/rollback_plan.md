@@ -1,18 +1,18 @@
-# Harness V2 rollback
+# Rollback del Harness V2
 
-Rollback restores exact recorded pre-install bytes, not reconstructed content.
+El rollback restaura los bytes exactos registrados antes de la instalación, no contenido reconstruido.
 
-For general V2 installation:
+Para la instalación V2 general:
 
-1. Stop and retain failure evidence and the durable state journal.
-2. Validate the manifest version, recorded target universe, and exact Codex/agents roots.
-3. For each prepared or completed action in reverse order, reconcile the current target with its before/installed hashes.
-4. Restore existing files from verified backups and original modes.
-5. Remove newly created files only when they still match the candidate hash, then remove installation-created directories only if empty.
-6. Restore stale project-bootstrap files only when their recorded target remains absent.
-7. Preserve and report any later human edit instead of overwriting it.
-8. Verify global AGENTS, routing, agents, toolbox, project-bootstrap, unrelated-skill aggregate hash, and unchanged config.
+1. Detente y conserva la evidencia del fallo y el journal de estado duradero.
+2. Valida la versión del manifest, el universo de targets registrado y los roots exactos de Codex/agents.
+3. Para cada acción preparada o completada, en orden inverso, reconcilia el target actual con sus hashes anterior/instalado.
+4. Restaura los archivos existentes desde backups verificados y con sus modos originales.
+5. Elimina los archivos recién creados sólo cuando sigan coincidiendo con el hash candidato; después elimina los directorios creados por la instalación sólo si están vacíos.
+6. Restaura archivos project-bootstrap obsoletos sólo cuando su target registrado siga ausente.
+7. Conserva e informa cualquier edición humana posterior en vez de sobrescribirla.
+8. Verifica AGENTS global, routing, agents, toolbox, project-bootstrap, el hash agregado de skills no relacionadas y que la config no haya cambiado.
 
-Rollback never changes a project, Git exclude, `.gitignore`, global Git configuration, auth, memory, or unrelated skill.
+El rollback nunca cambia un proyecto, el exclude de Git, `.gitignore`, la configuración global de Git, auth, memory ni skills no relacionadas.
 
-The optional Luna-parent migration has its own quality-gate receipt, durable migration journal, and backup. A human approves the exact gate-receipt hash. Apply revalidates its evaluator, fixtures, results, and candidate-config hashes before recording `PREPARED`; rollback handles prepared and committed states and refuses unrelated drift. Failure or rollback of this optional step does not remove Harness V2 workers, tools, routing, or project-bootstrap.
+La migración opcional del parent Luna tiene su propio comprobante de quality gate, journal duradero de migración y backup. Un humano aprueba el hash exacto del comprobante del gate. Apply vuelve a validar su evaluator, fixtures, resultados y hashes de candidate-config antes de registrar `PREPARED`; rollback gestiona estados prepared y committed y rechaza drift no relacionado. El fallo o rollback de este paso opcional no elimina workers, tools, routing ni project-bootstrap del Harness V2.

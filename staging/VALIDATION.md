@@ -1,31 +1,31 @@
-# Harness V2 staging validation
+# Validación del staging del Harness V2
 
-Validated on 2026-09-02 with Codex CLI 0.152.0. The quality red-team and local hybrid installation are complete. No project adoption, real-project Git-exclude change, or parent-model migration was performed.
+Validado el 2026-09-02 con Codex CLI 0.152.0. El quality red-team y la instalación híbrida local están completos. No se realizó ninguna adopción de proyecto, cambio del exclude de Git de un proyecto real ni migración del modelo parent.
 
-| Check | Result |
+| Comprobación | Resultado |
 |---|---|
 | `python3 -B staging/audit/validate_staging.py` | PASS |
-| Unified infrastructure/policy tests | 38/38 PASS |
-| Toolbox standalone tests | 3/3 PASS |
-| Git-privacy standalone tests | 4/4 PASS |
-| Quality fixture/result schema | 67 fixtures PASS |
-| project-bootstrap skill validator | PASS |
-| Blueprint/installed-copy asset parity | PASS |
-| Global AGENTS budget | 294 words; PASS |
-| Routing policy budget | 549 words; PASS |
-| Private project router budget | 129 words; PASS |
-| Independent Sol/low quality review | APPROVE after remediation |
+| Tests unificados de infraestructura/política | 38/38 PASS |
+| Tests independientes de toolbox | 3/3 PASS |
+| Tests independientes de privacidad de Git | 4/4 PASS |
+| Schema de fixtures/resultados de calidad | 67 fixtures PASS |
+| Validator de la skill project-bootstrap | PASS |
+| Paridad de assets entre blueprint y copia instalada | PASS |
+| Presupuesto del AGENTS global | 294 words; PASS |
+| Presupuesto de la política de enrutamiento | 549 words; PASS |
+| Presupuesto del enrutador privado del proyecto | 129 words; PASS |
+| Revisión de calidad independiente Sol/low | APPROVE tras la corrección |
 
-The suite exercises normal and linked worktrees, paths with spaces, tracked private-looking paths, dirty/non-Git/malformed repositories, idempotent excludes, read-only and symlink failures, local/global tool discovery and precedence, malformed/traversing/symlinked packages, non-executing discovery, project-only scaffolding, catalog/config invariants, quality-first ordering, outcome evidence, Sol-before-Luna control, general install/rollback, root mismatch, true interrupted PREPARED-journal recovery, exact evidence-bound parent migration, and drift rejection.
+La suite prueba worktrees normales y vinculados, rutas con espacios, rutas privadas aparentes con seguimiento, repositorios dirty/sin Git/mal formados, excludes idempotentes, fallos de read-only y symlinks, descubrimiento y precedencia de tools locales/globales, paquetes mal formados/con traversal/enlazados, descubrimiento sin ejecución, scaffolding exclusivo del proyecto, invariantes de catálogo/configuración, orden que prioriza la calidad, evidencia de resultados, control Sol antes de Luna, instalación/rollback general, discrepancias de root, recuperación real de un journal PREPARED interrumpido, migración exacta del parent vinculada a evidencia y rechazo de drift.
 
-The first reviewer pass found non-durable mutation journals, a boolean-only Luna gate, weak result evidence, rollback root ambiguity, and created-directory residue. These were corrected. A second pass found partial-prefix recovery and exact control/candidate binding gaps; these were corrected and the final closure review reported no BLOCKER or MAJOR finding.
+La primera pasada del reviewer encontró journals de mutación no duraderos, un gate Luna exclusivamente booleano, evidencia de resultados débil, ambigüedad del root de rollback y residuos de directorios creados. Se corrigieron. Una segunda pasada encontró gaps en la recuperación de prefijos parciales y la vinculación exacta entre control/candidato; se corrigieron y la revisión final de cierre no informó ningún finding BLOCKER ni MAJOR.
 
-## Quality decision
+## Decisión de calidad
 
-- Sol/medium parent control: 24 PASS, 0 regressions.
-- Luna/medium parent candidate: 18 PASS, 3 PASS_WITH_MINOR_DIFFERENCE, 3 ROUTING_REGRESSION, 0 safety regressions.
-- Parent decision: `KEEP_SOL_MEDIUM_PARENT`.
-- Researcher: Luna/medium after Luna/low missed material evidence.
-- Validator: Luna/low after the skipped-only/source-mutation contract was corrected and re-tested.
-- The V2 hybrid was installed locally through the validated migration; no real-project bootstrap was exercised.
-- Account-level model availability was not re-probed with paid workloads; current local Codex configuration/capabilities and active Sol use are the available evidence.
+- Control del parent Sol/medium: 24 PASS, 0 regresiones.
+- Candidato parent Luna/medium: 18 PASS, 3 PASS_WITH_MINOR_DIFFERENCE, 3 ROUTING_REGRESSION, 0 regresiones de seguridad.
+- Decisión sobre el parent: `KEEP_SOL_MEDIUM_PARENT`.
+- Researcher: Luna/medium después de que Luna/low omitiera evidencia material.
+- Validator: Luna/low después de corregir y volver a probar el contrato para sólo skips/mutación de fuente.
+- El híbrido V2 se instaló localmente mediante la migración validada; no se ejercitó ningún bootstrap de proyecto real.
+- La disponibilidad de modelos a nivel de cuenta no se volvió a probar con workloads de pago; la configuración/capacidades locales actuales de Codex y el uso activo de Sol son la evidencia disponible.

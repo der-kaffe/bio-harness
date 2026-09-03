@@ -1,40 +1,40 @@
-# Installation and rollback
+# Instalación y rollback
 
-Harness installation is a controlled promotion from reviewed source into the active Codex homes. Merely cloning this repository does not install or activate anything.
+La instalación del harness es una promoción controlada desde fuente revisada hacia los homes activos de Codex. Clonar este repositorio no instala ni activa nada por sí solo.
 
 ```mermaid
 flowchart TD
-    S[Source repository] --> V[Staging validation]
-    V --> P[Hash-aware plan]
-    P --> B[Verified backup]
-    B --> I[Transactional install]
-    I --> C{Post-install verification}
-    C -->|Success| D[Committed installation journal]
-    C -->|Failure| R[Hash-aware rollback]
+    S[Repositorio fuente] --> V[Validación de staging]
+    V --> P[Plan basado en hashes]
+    P --> B[Backup verificado]
+    B --> I[Instalación transaccional]
+    I --> C{Verificación posterior a la instalación}
+    C -->|Correcto| D[Journal de instalación confirmado]
+    C -->|Fallo| R[Rollback basado en hashes]
 ```
 
-## General V2 migration
+## Migración general V2
 
-The migration program is [`staging/migration/v2_migrate.py`](../staging/migration/v2_migrate.py). It supports `snapshot`, `plan`, `install`, and `rollback`. Every invocation requires explicit `--codex-home` and `--agents-home` roots; mutation additionally requires a baseline and backup location.
+El programa de migración es [`staging/migration/v2_migrate.py`](../staging/migration/v2_migrate.py). Admite `snapshot`, `plan`, `install` y `rollback`. Cada invocación exige roots explícitos mediante `--codex-home` y `--agents-home`; las mutaciones también requieren un baseline y una ubicación para el backup.
 
-A safe installation sequence is:
+Una secuencia de instalación segura es:
 
-1. run deterministic staging validation;
-2. snapshot the intended active targets;
-3. inspect the plan against current hashes;
-4. create and verify a private backup outside the install targets;
-5. install using the validated source and journal;
-6. verify active hashes, role pins, skills, toolbox behavior, and unchanged configuration;
-7. roll back if installation or independent review fails.
+1. ejecutar la validación determinista de staging;
+2. tomar un snapshot de los targets activos previstos;
+3. inspeccionar el plan contra los hashes actuales;
+4. crear y verificar un backup privado fuera de los targets de instalación;
+5. instalar utilizando la fuente y el journal validados;
+6. verificar los hashes activos, los pins de roles, las skills, el comportamiento de la toolbox y que la configuración siga sin cambios;
+7. ejecutar rollback si falla la instalación o la revisión independiente.
 
-Use `python3 staging/migration/v2_migrate.py --help` to inspect the current CLI before constructing a command. Do not reuse a baseline after active-state drift.
+Usa `python3 staging/migration/v2_migrate.py --help` para inspeccionar la CLI actual antes de construir un comando. No reutilices un baseline después de que cambie el estado activo.
 
-The migration replaces only its declared targets under `~/.codex` and `~/.agents`; it preserves unrelated skills and does not adopt real projects. Machine backups are local data and are excluded from this repository.
+La migración sólo reemplaza sus targets declarados bajo `~/.codex` y `~/.agents`; conserva las skills no relacionadas y no adopta proyectos reales. Los backups de la máquina son datos locales y se excluyen de este repositorio.
 
-## Parent model is a separate gate
+## El modelo parent es un gate separado
 
-Ordinary V2 installation leaves `~/.codex/config.toml` unchanged. The approved parent is GPT-5.6 Sol/medium. [`staging/migration/migrate_parent_model.py`](../staging/migration/migrate_parent_model.py) is a separate, reversible, evidence-bound migration and is currently **blocked** because Luna/medium failed the parent quality gate. Do not couple it to routine V2 installation.
+La instalación V2 ordinaria deja `~/.codex/config.toml` sin cambios. El parent aprobado es GPT-5.6 Sol/medium. [`staging/migration/migrate_parent_model.py`](../staging/migration/migrate_parent_model.py) es una migración separada, reversible y vinculada a evidencia que actualmente está **bloqueada** porque Luna/medium no superó el quality gate del parent. No la acoples a la instalación V2 rutinaria.
 
-## Recovery guarantees
+## Garantías de recuperación
 
-The general migration records original bytes, hashes, modes, target presence, and per-action journal state. It stops on unexpected drift, writes atomically where practical, and rejects rollback when targets changed after installation. See the [migration plan](../staging/migration/migration_plan.md), [rollback plan](../staging/migration/rollback_plan.md), and [latest installation audit](../staging/audit/HARNESS_V2_HYBRID_INSTALL_20260902T231047Z.md).
+La migración general registra los bytes originales, hashes, modos, existencia de targets y estado del journal para cada acción. Se detiene ante cambios inesperados, escribe de forma atómica cuando resulta práctico y rechaza el rollback si los targets cambiaron después de la instalación. Consulta el [plan de migración](../staging/migration/migration_plan.md), el [plan de rollback](../staging/migration/rollback_plan.md) y la [última auditoría de instalación](../staging/audit/HARNESS_V2_HYBRID_INSTALL_20260902T231047Z.md).

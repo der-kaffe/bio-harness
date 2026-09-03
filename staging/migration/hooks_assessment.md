@@ -1,15 +1,15 @@
-# Hooks assessment
+# Evaluación de hooks
 
-No hooks are configured in the candidate. Codex 0.152.0 supports lifecycle, tool, compaction, and subagent hook events, but support alone is not a justification for automation.
+El candidato no configura hooks. Codex 0.152.0 admite eventos de hooks del ciclo de vida, tools, compaction y subagentes, pero la compatibilidad por sí sola no justifica la automatización.
 
-| AREA | ASSESSMENT | POSSIBLE FUTURE USE | CURRENT DECISION |
+| ÁREA | EVALUACIÓN | POSIBLE USO FUTURO | DECISIÓN ACTUAL |
 |---|---|---|---|
-| Session lifecycle | USEFUL | Remind or deterministically check whether resumable state is stale at meaningful boundaries | NOT YET REQUIRED; avoid noisy mandatory writes |
-| Tool events | USEFUL WITH CARE | Block a precisely demonstrated dangerous command/tool shape or run a cheap deterministic check | NOT YET REQUIRED; no universal complete command policy has been demonstrated |
-| Pre/Post compaction | USEFUL | Check that critical decisions/current state were externalized before context loss | NOT YET REQUIRED; a hook must not fabricate or autoaccept state |
-| Subagent start/stop | USEFUL | Record bounded provenance or require a structured result for specific project workflows | NOT YET REQUIRED; avoid global orchestration overhead |
-| Automatic content mutation | DANGEROUS/AVOID | Rewriting registers, specs, approved content, or run state without review | AVOID |
-| Automatic destructive remediation | DANGEROUS/AVOID | Cleanup, reset, migration, credential changes | AVOID |
-| Networked hook actions | DANGEROUS/AVOID by default | Notifications or external updates | Require explicit integration, secrets policy, idempotency, and approval design |
+| Ciclo de vida de sesión | USEFUL | Recordar o comprobar de forma determinista si el estado reanudable está obsoleto en límites relevantes | NOT YET REQUIRED; evitar escrituras obligatorias ruidosas |
+| Eventos de tools | USEFUL WITH CARE | Bloquear una forma de comando/tool peligrosa y demostrada con precisión o ejecutar una comprobación determinista barata | NOT YET REQUIRED; no se ha demostrado una política universal y completa de comandos |
+| Pre/Post compaction | USEFUL | Comprobar que las decisiones críticas/el estado actual se externalizaron antes de perder contexto | NOT YET REQUIRED; un hook no debe fabricar ni autoaceptar estado |
+| Inicio/fin de subagente | USEFUL | Registrar procedencia acotada o exigir un resultado estructurado para workflows de proyecto específicos | NOT YET REQUIRED; evitar overhead de orquestación global |
+| Mutación automática de contenido | DANGEROUS/AVOID | Reescribir registros, specs, contenido aprobado o run state sin revisión | AVOID |
+| Remediación destructiva automática | DANGEROUS/AVOID | Limpieza, reset, migración, cambios de credenciales | AVOID |
+| Acciones de hooks con red | DANGEROUS/AVOID por defecto | Notificaciones o actualizaciones externas | Exigir integración explícita, política de secrets, idempotencia y diseño de aprobación |
 
-A hook becomes justified only when a recurring failure has evidence, a deterministic safe check exists, failure behavior is understood, and rollback/ownership are defined.
+Un hook sólo se justifica cuando un fallo recurrente tiene evidencia, existe una comprobación determinista segura, se comprende el comportamiento de fallo y están definidos el rollback/ownership.

@@ -1,10 +1,10 @@
-# Reusable deterministic toolbox
+# Toolbox determinista reutilizable
 
-A **skill** teaches how to work or reason. A **tool** performs a deterministic mechanical responsibility. Architecture choices, ambiguous interpretation, and domain decisions remain reasoning; inventory, hashing, manifest comparison, validation, and stable transformations may become tools.
+Una **skill** enseña cómo trabajar o razonar. Una **tool** realiza una responsabilidad mecánica determinista. Las elecciones de arquitectura, la interpretación ambigua y las decisiones de dominio siguen siendo razonamiento; el inventario, los hashes, la comparación de manifests, la validación y las transformaciones estables pueden convertirse en herramientas.
 
-## Scopes and package
+## Ámbitos y paquete
 
-Project-private tools live under `.ai/tools/<name>/`. Cross-project tools live under `~/.codex/toolbox/<name>/` and require explicit promotion approval.
+Las herramientas privadas del proyecto residen en `.ai/tools/<name>/`. Las herramientas entre proyectos residen en `~/.codex/toolbox/<name>/` y requieren una aprobación explícita de promoción.
 
 ```text
 tool/
@@ -13,25 +13,25 @@ tool/
 └── test_tool.py
 ```
 
-Python's standard library is the generic default, but a project's existing language may be a better fit. The small manifest declares only discovery-relevant metadata such as name, description, tags, entrypoint, test, determinism, and mutation.
+La biblioteca estándar de Python es el valor genérico predeterminado, aunque el lenguaje ya utilizado por un proyecto puede encajar mejor. El pequeño manifest sólo declara metadata relevante para el descubrimiento, como name, description, tags, entrypoint, test, determinism y mutation.
 
-## Discovery and extraction
+## Descubrimiento y extracción
 
 ```text
-semantically matching validated tool → reuse
-trivial one-off mechanical work       → direct
-stable repeated deterministic helper  → consider project extraction
-reasoning-heavy responsibility        → keep as reasoning
+herramienta validada con coincidencia semántica → reutilizar
+trabajo mecánico trivial y puntual             → ejecutar directamente
+helper determinista, estable y repetido         → considerar extracción al proyecto
+responsabilidad que exige razonamiento           → mantener como razonamiento
 ```
 
-Project manifests are searched before global manifests. Project precedence applies only when semantic responsibility matches; filename or tag similarity is insufficient. Source is read only when modifying, debugging, reviewing, or resolving an insufficient interface.
+Se buscan los manifests del proyecto antes que los globales. La prioridad del proyecto sólo se aplica cuando coincide la responsabilidad semántica; un filename o tag parecido no basta. El código fuente sólo se lee al modificar, depurar, revisar o resolver una interfaz insuficiente.
 
-Extraction considers determinism, recurrence, stable semantics, validation cost, safety, and token benefit. It is not a rigid line-count rule. A second substantially equivalent helper is strong evidence for extraction; repetition never turns judgment into a deterministic tool.
+La extracción considera el determinismo, la recurrencia, la estabilidad semántica, el coste de validación, la seguridad y el beneficio en tokens. No es una regla rígida basada en cantidad de líneas. Un segundo helper sustancialmente equivalente es una evidencia sólida a favor de la extracción; la repetición nunca convierte el criterio en una herramienta determinista.
 
-## Security
+## Seguridad
 
-Discovery parses manifests and never executes entrypoints or tests. Validation rejects unsafe names, absolute or traversing paths, malformed TOML, package/path symlink escapes, and invalid boolean fields. Tests run only when explicitly requested. Mutating tools must declare their surface and have task authority.
+El descubrimiento parsea manifests y nunca ejecuta entrypoints ni tests. La validación rechaza nombres inseguros, rutas absolutas o con traversal, TOML mal formado, escapes mediante symlinks de paquetes/rutas y campos booleanos no válidos. Los tests sólo se ejecutan cuando se solicitan explícitamente. Las herramientas que mutan deben declarar su superficie y contar con autoridad para la tarea.
 
-A project must never write to the global toolbox silently. Global promotion requires human approval, repeated cross-project evidence, generic stable semantics, tests, dependency review, and collision handling. Mutating global tools require explicit approval.
+Un proyecto nunca debe escribir silenciosamente en la toolbox global. La promoción global requiere aprobación humana, evidencia repetida entre proyectos, semántica genérica estable, tests, revisión de dependencias y gestión de colisiones. Las herramientas globales que mutan requieren aprobación explícita.
 
-The system utility supports compact `list`, `search`, `validate`, and safe project-local `scaffold` operations. Its source is [`staging/global/codex/toolbox/_system/toolbox.py`](../staging/global/codex/toolbox/_system/toolbox.py).
+La utilidad del sistema admite operaciones compactas `list`, `search`, `validate` y `scaffold` local al proyecto y seguro. Su fuente es [`staging/global/codex/toolbox/_system/toolbox.py`](../staging/global/codex/toolbox/_system/toolbox.py).

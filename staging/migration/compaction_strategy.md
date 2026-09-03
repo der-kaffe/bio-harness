@@ -1,13 +1,13 @@
-# Compaction strategy
+# Estrategia de compaction
 
-Keep Codex 0.152.0 compaction defaults. No custom token threshold, scope, prompt, or compaction hook is justified yet.
+Mantén los valores predeterminados de compaction de Codex 0.152.0. Por ahora no se justifica ningún threshold de tokens, alcance, prompt ni hook de compaction personalizado.
 
-Methodological rule: **durable information must be externalized before context loss matters**.
+Regla metodológica: **la información duradera debe externalizarse antes de que la pérdida de contexto sea relevante**.
 
-- Critical facts belong in the source-of-truth register.
-- Accepted/proposed choices belong in the decision register.
-- Required behavior belongs in specifications.
-- Current resumable work belongs in run state.
-- Significant completed history belongs in progress.
+- Los hechos críticos pertenecen al registro source-of-truth.
+- Las elecciones aceptadas/propuestas pertenecen al decision register.
+- El comportamiento requerido pertenece a las especificaciones.
+- El trabajo actual reanudable pertenece al run state.
+- La historia completada relevante pertenece a progress.
 
-Conversation summaries and compaction output are navigation aids, not authoritative storage. A future pre-compaction hook may be evaluated only if repeated evidence shows sessions lose critical resumable state and a safe, non-fabricating check can detect that condition. It must not autoaccept decisions or overwrite human content.
+Los resúmenes de conversación y el output de compaction ayudan a navegar, no son almacenamiento autoritativo. Un futuro hook previo a compaction sólo podrá evaluarse si evidencia repetida demuestra que las sesiones pierden estado crítico reanudable y una comprobación segura, que no fabrique información, puede detectar esa condición. No debe autoaceptar decisiones ni sobrescribir contenido humano.

@@ -1,37 +1,37 @@
-# Adaptive project bootstrap
+# Bootstrap adaptativo de proyectos
 
-project-bootstrap does not install a standard folder tree. It inspects the repository, classifies existing state, and proposes the smallest useful private Codex layer.
+project-bootstrap no instala un árbol estándar de carpetas. Inspecciona el repositorio, clasifica el estado existente y propone la capa privada útil más pequeña para Codex.
 
 ```mermaid
 flowchart TD
-    E[Enter project] --> I[Inspect reality]
-    I --> T[Read tracked truth]
-    T --> C[Classify existing AI state]
-    C --> P[Establish local privacy if safe]
-    P --> R{Private router useful?}
-    R -->|No| A[Activate only current needs]
-    R -->|Yes| PR[Create .ai/PROJECT.md]
+    E[Entrar en el proyecto] --> I[Inspeccionar la realidad]
+    I --> T[Leer la verdad con seguimiento]
+    T --> C[Clasificar el estado de IA existente]
+    C --> P[Establecer privacidad local si es seguro]
+    P --> R{¿Es útil un enrutador privado?}
+    R -->|No| A[Activar sólo las necesidades actuales]
+    R -->|Sí| PR[Crear .ai/PROJECT.md]
     PR --> A
-    A --> S[Private SDD?]
-    A --> ST[State or handoff?]
-    A --> TL[Project tool?]
-    A --> AG[Bounded agent routing?]
+    A --> S[¿SDD privado?]
+    A --> ST[¿Estado o handoff?]
+    A --> TL[¿Herramienta de proyecto?]
+    A --> AG[¿Enrutamiento acotado de agentes?]
 ```
 
-## Classification
+## Clasificación
 
-| Class | Meaning |
+| Clase | Significado |
 |---|---|
-| `REUSE` | Existing artifact already owns the responsibility |
-| `ADAPT` | Useful responsibility, adjusted to project reality |
-| `MIGRATION_PROPOSED` | A move or replacement may help but needs approval |
-| `CONFLICT` | Tracking, authority, content, or path safety prevents automatic adoption |
-| `SKIP` | No active need or duplication would result |
+| `REUSE` | Un artefacto existente ya es responsable de esa función |
+| `ADAPT` | Responsabilidad útil, ajustada a la realidad del proyecto |
+| `MIGRATION_PROPOSED` | Un traslado o reemplazo podría ayudar, pero requiere aprobación |
+| `CONFLICT` | El seguimiento, la autoridad, el contenido o la seguridad de la ruta impiden la adopción automática |
+| `SKIP` | No hay una necesidad activa o se produciría una duplicación |
 
-Bootstrap resolves the nearest Git root, reads applicable tracked instructions and conventions, inspects status and symlinks, and identifies existing AI-looking paths. Non-Git directories are not initialized automatically. Existing old layouts are never silently moved, renamed, or deleted.
+Bootstrap resuelve la raíz Git más cercana, lee las instrucciones y convenciones con seguimiento que correspondan, inspecciona el estado y los symlinks e identifica rutas existentes que parezcan relacionadas con IA. Los directorios sin Git no se inicializan automáticamente. Los layouts antiguos nunca se trasladan, renombran ni eliminan silenciosamente.
 
-Privacy inspection precedes any apply step. The helper appends local exclude patterns only when no tracked private-path conflict exists. Template assets are an inert menu and must remain self-contained so the installed skill never depends on this source checkout.
+La inspección de privacidad precede cualquier paso de aplicación. El helper sólo añade patrones de exclude locales cuando no hay conflictos con rutas privadas que tengan seguimiento. Los assets de plantillas son un menú inerte y deben seguir siendo autosuficientes para que la skill instalada nunca dependa de este checkout fuente.
 
-After authorized creation, bootstrap verifies boundaries, exclusions, links, placeholders, modes, duplicate responsibility, contradictions, context size, and relevant project checks. It reports created, reused, skipped, conflicting, and unvalidated items separately.
+Tras una creación autorizada, bootstrap verifica límites, exclusiones, enlaces, placeholders, modos, responsabilidades duplicadas, contradicciones, tamaño del contexto y comprobaciones pertinentes del proyecto. Informa por separado los elementos creados, reutilizados, omitidos, en conflicto y sin validar.
 
-Source: [`staging/global/agents/skills/project-bootstrap/`](../staging/global/agents/skills/project-bootstrap/).
+Fuente: [`staging/global/agents/skills/project-bootstrap/`](../staging/global/agents/skills/project-bootstrap/).

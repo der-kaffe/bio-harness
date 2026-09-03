@@ -1,29 +1,29 @@
-# Safety and human gates
+# Seguridad y human gates
 
-Sandboxing limits technical access. Human gates govern meaning and authority.
+El sandbox limita el acceso técnico. Los human gates gobiernan el significado y la autoridad.
 
 ```mermaid
 flowchart LR
-    P[Propose] --> I[Analyze impact]
-    I --> V[Preview exact action]
-    V --> A{Human approval}
-    A -->|Approved| E[Execute]
-    E --> C[Validate]
-    A -->|Not approved| S[Stop safely]
+    P[Proponer] --> I[Analizar impacto]
+    I --> V[Previsualizar la acción exacta]
+    V --> A{Aprobación humana}
+    A -->|Aprobada| E[Ejecutar]
+    E --> C[Validar]
+    A -->|No aprobada| S[Detenerse de forma segura]
 ```
 
-The gate applies before insufficiently authorized actions with material irreversible, destructive, lossy, production, security, infrastructure, protected-content, public-contract, or broad impact. Common harness examples include:
+El gate se aplica antes de acciones con autorización insuficiente y un impacto material irreversible, destructivo, con pérdidas, de producción, seguridad, infraestructura, contenido protegido, contrato público o alcance amplio. Algunos ejemplos habituales del harness son:
 
-- schema and durable-data migration;
-- destructive or difficult-to-reverse operations;
-- security-boundary changes;
-- global toolbox promotion, especially mutating tools;
-- consequential private-to-shared documentation promotion;
-- installation over unexpected active drift;
-- any parent-model migration.
+- migración de schemas y datos duraderos;
+- operaciones destructivas o difíciles de revertir;
+- cambios en límites de seguridad;
+- promoción a la toolbox global, especialmente de herramientas que mutan;
+- promoción relevante de documentación privada a compartida;
+- instalación sobre cambios inesperados en el estado activo;
+- cualquier migración del modelo parent.
 
-Approval identifies the action and target. Once that exact action is approved, the harness should not ask ceremonially again. Broader or materially changed actions require a new gate.
+La aprobación identifica la acción y el target. Una vez aprobada esa acción exacta, el harness no debe volver a preguntar por ceremonia. Las acciones más amplias o con cambios materiales requieren un gate nuevo.
 
-Repeated requests, prior successful execution, tool availability, or a model's confidence never create authority. Private `.ai` state cannot waive tracked project gates. When authoritative sources conflict, surface the contradiction and request the missing decision instead of silently choosing.
+Las solicitudes repetidas, una ejecución previa correcta, la disponibilidad de una herramienta o la confianza de un modelo nunca crean autoridad. El estado privado `.ai` no puede eludir los gates del proyecto con seguimiento. Cuando las fuentes autoritativas entren en conflicto, muestra la contradicción y solicita la decisión que falta en vez de elegir silenciosamente.
 
-Validation is part of the gate: report what ran, what failed, what changed, and what remains uncertain. A blocked environment is not evidence of product failure, and an exit-zero validator command that mutates tracked source is still a validation failure.
+La validación forma parte del gate: informa qué se ejecutó, qué falló, qué cambió y qué sigue siendo incierto. Un entorno bloqueado no demuestra un fallo del producto, y un comando validator con exit zero que muta fuente con seguimiento sigue siendo un fallo de validación.

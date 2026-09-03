@@ -1,23 +1,23 @@
-# Harness V2 migration preview
+# Preview de migración del Harness V2
 
-This is preparation, not authorization. Do not run against active homes until the exact targets and baseline are approved.
+Esto es preparación, no autorización. No lo ejecutes contra homes activos hasta que se aprueben los targets exactos y el baseline.
 
-## General V2 installation
+## Instalación V2 general
 
-`v2_migrate.py` snapshots, previews, installs, and rolls back:
+`v2_migrate.py` crea snapshots y previews, instala y ejecuta rollback de:
 
-- global `AGENTS.md`;
-- on-demand routing policy;
-- six explicit agent definitions;
-- toolbox system utility and tests;
-- self-contained project-bootstrap skill, references, helper, and assets.
+- `AGENTS.md` global;
+- política de enrutamiento bajo demanda;
+- seis definiciones explícitas de agentes;
+- utilidad del sistema de toolbox y tests;
+- skill project-bootstrap autosuficiente, referencias, helper y assets.
 
-It intentionally excludes `config.toml`, unrelated skills, Git configuration, projects, and authentication/state. Snapshot records target hashes, modes, absences, the complete existing project-bootstrap file set, and candidate hashes. Plan/install stop on candidate, target, root, or target-universe drift. Install durably backs up targets and records a `PREPARED` intent before every file mutation, then records `COMMITTED` after atomic replacement or removal. Recovery reconciles current hashes with prepared/committed states, refuses later drift, and removes only installation-created directories when they remain empty.
+Excluye deliberadamente `config.toml`, skills no relacionadas, la configuración de Git, proyectos y autenticación/estado. El snapshot registra los hashes, modos y ausencias de targets, el conjunto completo de archivos project-bootstrap existentes y los hashes de los candidatos. Plan/install se detiene ante drift del candidato, target, root o universo de targets. Install crea backups duraderos de los targets y registra una intención `PREPARED` antes de cada mutación de archivo; después registra `COMMITTED` tras el reemplazo o la eliminación atómica. Recovery reconcilia los hashes actuales con los estados prepared/committed, rechaza el drift posterior y sólo elimina directorios creados por la instalación cuando siguen vacíos.
 
-Use a mock home first. For active installation, capture an approved baseline immediately before the exclusive migration window and review the plan before `install`.
+Usa primero un home simulado. Para una instalación activa, captura un baseline aprobado justo antes de la ventana exclusiva de migración y revisa el plan antes de `install`.
 
-## Separate optional parent migration
+## Migración opcional y separada del parent
 
-`migrate_parent_model.py` is a distinct operation. It accepts only the expected Sol/medium control and exact config hash. It validates a content-addressed quality-gate receipt, reruns its pinned evaluator against the exact hashed fixtures/results, and requires the human-approved receipt hash. It durably writes the backup and `PREPARED` journal before changing only the model to Luna, then records `COMMITTED`; rollback also recovers a prepared transaction and refuses later drift.
+`migrate_parent_model.py` es una operación distinta. Sólo acepta el control Sol/medium esperado y el hash exacto de config. Valida un comprobante de quality gate dirigido por contenido, vuelve a ejecutar su evaluator fijado contra las fixtures/resultados con hashes exactos y exige el hash del comprobante aprobado por el humano. Escribe de forma duradera el backup y el journal `PREPARED` antes de cambiar únicamente el modelo a Luna y después registra `COMMITTED`; el rollback también recupera una transacción preparada y rechaza el drift posterior.
 
-Never bundle this optional step with general V2 installation. Run it only after Sol/medium control fixtures precede and support a non-regressing Luna/medium outcome and a human approves the result.
+Nunca agrupes este paso opcional con la instalación V2 general. Ejecútalo sólo después de que las fixtures de control Sol/medium precedan y respalden un resultado Luna/medium sin regresiones y un humano apruebe el resultado.

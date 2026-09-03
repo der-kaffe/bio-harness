@@ -1,46 +1,46 @@
 # Quality red-team
 
-The V2 gate tried to falsify the claim that cheaper routing preserved required quality. It compared outcomes rather than prose and treated safety, authority, missed requirements, incomplete repair, and wrong routing as material.
+El gate V2 intentó refutar la afirmación de que un enrutamiento más barato conservaba la calidad requerida. Comparó resultados en vez de prosa y trató como materiales los problemas de seguridad, autoridad, requisitos omitidos, reparación incompleta y enrutamiento incorrecto.
 
-## Gate method
+## Método del gate
 
 ```mermaid
 flowchart TD
-    C[Cheaper candidate] --> F[Representative fixtures]
-    F --> E[Evaluate quality, safety, and routing]
-    E --> P{Material regression?}
-    P -->|No| A[Eligible for adoption]
-    P -->|Yes| K[Keep baseline]
+    C[Candidato más barato] --> F[Fixtures representativas]
+    F --> E[Evaluar calidad, seguridad y enrutamiento]
+    E --> P{¿Regresión material?}
+    P -->|No| A[Elegible para adopción]
+    P -->|Sí| K[Conservar baseline]
 ```
 
-The authoritative parent comparison used one checked-in prompt, isolated contexts, Sol/medium control first, Luna/medium candidate second, and exact retained outputs. A supplemental identical factual prompt closed an evidence gap. Content-addressed manifests bind fixtures, results, prompts, outputs, evaluator, and migration receipts.
+La comparación autoritativa del parent utilizó un único prompt incluido en el repositorio, contextos aislados, primero el control Sol/medium, después el candidato Luna/medium y outputs exactos conservados. Un prompt factual idéntico y complementario cerró un gap de evidencia. Los manifests dirigidos por contenido vinculan fixtures, resultados, prompts, outputs, evaluator y comprobantes de migración.
 
-## Parent outcome
+## Resultado del parent
 
-| Configuration | PASS | PASS_WITH_MINOR_DIFFERENCE | ROUTING_REGRESSION | SAFETY_REGRESSION |
+| Configuración | PASS | PASS_WITH_MINOR_DIFFERENCE | ROUTING_REGRESSION | SAFETY_REGRESSION |
 |---|---:|---:|---:|---:|
-| Sol/medium control | 24 | 0 | 0 | 0 |
-| Luna/medium candidate | 18 | 3 | 3 | 0 |
+| Control Sol/medium | 24 | 0 | 0 | 0 |
+| Candidato Luna/medium | 18 | 3 | 3 | 0 |
 
-The Luna parent failed because it:
+El parent Luna falló porque:
 
-- omitted premium review from a possible-data-loss migration;
-- did not return a failed implementation to its owning implementer before revalidation;
-- assigned shared public protocol/schema work without one contract owner.
+- omitió la revisión premium en una migración con posible pérdida de datos;
+- no devolvió una implementación fallida a su implementer responsable antes de revalidarla;
+- asignó trabajo compartido de protocolo/schema público sin un único responsable del contrato.
 
-Conclusion: `KEEP_SOL_MEDIUM_PARENT`.
+Conclusión: `KEEP_SOL_MEDIUM_PARENT`.
 
-## Independent worker gates
+## Gates independientes de workers
 
-The researcher trial exposed an evidence-quality failure at Luna/low: it treated a docstring-only test as behavioral confirmation. Luna/medium correctly identified the missing assertion and became the validated assignment.
+La prueba de researcher reveló un fallo de calidad de evidencia con Luna/low: trató un test limitado al docstring como confirmación de comportamiento. Luna/medium identificó correctamente la aserción ausente y se convirtió en la asignación validada.
 
-The validator remained Luna/low, but its original role contract did not precisely classify skipped-only checks or exit-zero source mutation. The contract was corrected and a fresh run passed. Invalid or all-skipped assigned checks are now `BLOCKED`; tracked-source mutation makes validation fail regardless of process exit status.
+Validator permaneció en Luna/low, pero su contrato de rol original no clasificaba con precisión las comprobaciones que sólo tenían skips ni la mutación de fuente con exit zero. Se corrigió el contrato y una ejecución nueva pasó. Las comprobaciones asignadas no válidas o con todos los tests omitidos ahora son `BLOCKED`; la mutación de fuente con seguimiento hace fallar la validación con independencia del exit status del proceso.
 
-Quick implementation, normal implementation, premium planning, and premium review passed their role-specific fixtures. This hybrid result is the intended quality-first outcome: cheaper roles survive only where their own evidence supports them; the parent need not become cheaper for V2 to succeed.
+La implementación rápida, la implementación normal, la planificación premium y la revisión premium superaron sus fixtures específicas de rol. Este resultado híbrido es el resultado deseado que prioriza la calidad: los roles más baratos sólo sobreviven donde su propia evidencia los respalda; no es necesario abaratar el parent para que V2 tenga éxito.
 
-## Evidence
+## Evidencia
 
-- [Red-team report](../staging/audit/quality/REDTEAM_REPORT.md)
-- [Exact trial artifacts](../staging/audit/quality/TRIAL_ARTIFACTS.md)
-- [Machine-readable results](../staging/audit/quality/redteam_results.json)
-- [Independent review](../staging/audit/quality/INDEPENDENT_REVIEW.md)
+- [Informe de red-team](../staging/audit/quality/REDTEAM_REPORT.md)
+- [Artefactos exactos de las pruebas](../staging/audit/quality/TRIAL_ARTIFACTS.md)
+- [Resultados legibles por máquinas](../staging/audit/quality/redteam_results.json)
+- [Revisión independiente](../staging/audit/quality/INDEPENDENT_REVIEW.md)

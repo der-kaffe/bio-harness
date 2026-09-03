@@ -1,5 +1,5 @@
-# Private project blueprint
+# Blueprint privado de proyecto
 
-This is a menu of inert templates for a personal `.ai/` workspace, not an installation manifest and not team policy. Project bootstrap first inspects tracked project truth, Git tracking, existing AI-looking paths, conventions, and active needs. It then classifies each responsibility and creates only useful, approved private artifacts.
+Este es un menú de plantillas inertes para un workspace personal `.ai/`, no un manifest de instalación ni una política de equipo. El bootstrap del proyecto inspecciona primero la verdad del proyecto con seguimiento, el tracking de Git, las rutas existentes que parecen relacionadas con IA, las convenciones y las necesidades activas. Después clasifica cada responsabilidad y crea únicamente artefactos privados útiles y aprobados.
 
-A tiny repository may need nothing. Do not copy this tree wholesale, create empty ceremony, overwrite existing files, or treat private material as shared authority. Apply [ACTIVATION.md](ACTIVATION.md).
+Un repositorio diminuto puede no necesitar nada. No copies este árbol en bloque, crees ceremonia vacía, sobrescribas archivos existentes ni trates material privado como autoridad compartida. Aplica [ACTIVATION.md](ACTIVATION.md).

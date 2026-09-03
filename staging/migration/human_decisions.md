@@ -1,9 +1,9 @@
-# Human decisions still required
+# Decisiones humanas aún necesarias
 
-1. Approve or reject the unified V2 staged candidate after quality red-team findings are resolved.
-2. Authorize the exact general V2 active targets and migration baseline. This installs private-workspace routing, six explicit roles, toolbox support, and project-bootstrap V2 but does not change the parent model.
-3. Decide whether each real project should adopt a private `.ai` workspace. Project adoption is separate and path-specific; no project is bootstrapped globally.
-4. Approve any migration of an older project-local harness path after reviewing its `REUSE`, `ADAPT`, `MIGRATION_PROPOSED`, `CONFLICT`, or `SKIP` map.
-5. Run and review the representative Sol/medium control and Luna/medium candidate quality benchmark.
-6. Only if the quality gate passes, separately authorize the reversible parent-model migration to Luna/medium. Failure leaves Sol/medium as the correct supported V2 outcome.
-7. Approve each project-to-global tool promotion independently; mutating global tools require explicit human approval.
+1. Aprobar o rechazar el candidato V2 unificado en staging después de resolver los findings del quality red-team.
+2. Autorizar los targets activos exactos y el baseline de migración para V2 general. Esto instala el enrutamiento de workspace privado, seis roles explícitos, soporte de toolbox y project-bootstrap V2, pero no cambia el modelo parent.
+3. Decidir si cada proyecto real debe adoptar un workspace privado `.ai`. La adopción de proyectos es separada y específica para cada ruta; ningún proyecto se inicializa globalmente.
+4. Aprobar cualquier migración de una ruta antigua del harness local al proyecto después de revisar su mapa `REUSE`, `ADAPT`, `MIGRATION_PROPOSED`, `CONFLICT` o `SKIP`.
+5. Ejecutar y revisar el benchmark de calidad representativo del control Sol/medium y el candidato Luna/medium.
+6. Sólo si pasa el quality gate, autorizar por separado la migración reversible del modelo parent a Luna/medium. Un fallo conserva Sol/medium como el resultado V2 compatible correcto.
+7. Aprobar de forma independiente cada promoción de tools desde el proyecto al ámbito global; las tools globales que mutan requieren aprobación humana explícita.

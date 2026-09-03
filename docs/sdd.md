@@ -1,22 +1,22 @@
-# Proportional specification-driven development
+# Desarrollo proporcional basado en especificaciones
 
-Specification-driven development (SDD) makes durable reasoning explicit when that improves correctness. It is proportional, not a mandatory document pipeline.
+El desarrollo basado en especificaciones (SDD) hace explícito el razonamiento duradero cuando eso mejora la corrección. Es proporcional, no un pipeline obligatorio de documentos.
 
 ```text
-Need → Specification → Design → Plan → Implementation → Validation
+Necesidad → Especificación → Diseño → Plan → Implementación → Validación
 ```
 
-Any stage may be compressed or omitted when the task does not benefit from it.
+Cualquier etapa puede comprimirse u omitirse cuando no beneficie a la tarea.
 
-| Task class | Typical treatment |
+| Clase de tarea | Tratamiento habitual |
 |---|---|
-| Trivial | Direct work and an obvious check |
-| Small | Implementation and focused tests; brief plan only if useful |
-| Medium | Lightweight durable specification for important rules or interfaces |
-| Large/risky | Selected requirements, decision, specification, design, and plan artifacts warranted by risk |
+| Trivial | Trabajo directo y una comprobación evidente |
+| Pequeña | Implementación y tests enfocados; plan breve sólo si resulta útil |
+| Mediana | Especificación duradera y ligera para reglas o interfaces importantes |
+| Grande/arriesgada | Artefactos seleccionados de requisitos, decisión, especificación, diseño y plan que el riesgo justifique |
 
-There is no mandatory `tasks.md`, and large work does not automatically require every possible file. Durable-data, security, migration, concurrency, public-contract, and consequential architecture work generally needs stronger planning and human decisions than file count alone suggests.
+No hay un `tasks.md` obligatorio, y el trabajo grande no requiere automáticamente todos los archivos posibles. El trabajo con datos duraderos, seguridad, migración, concurrencia, contratos públicos y arquitectura con consecuencias relevantes suele necesitar una planificación y decisiones humanas más sólidas de lo que sugiere únicamente la cantidad de archivos.
 
-Personal SDD defaults to `.ai/specs/<feature>/`. A small feature might use one `spec.md`; larger work may separate requirements, decision, specification, design, and plan. These private artifacts guide the agent but do not become team requirements automatically.
+El SDD personal utiliza `.ai/specs/<feature>/` de forma predeterminada. Una feature pequeña puede usar un único `spec.md`; el trabajo más grande puede separar requisitos, decisión, especificación, diseño y plan. Estos artefactos privados guían al agente, pero no se convierten automáticamente en requisitos del equipo.
 
-If a decision or requirement becomes genuinely team-facing, propose promotion into the repository's existing shared documentation convention. Explain why collaborators need it and obtain approval when it changes a project or team contract.
+Si una decisión o requisito pasa a afectar realmente al equipo, propón su promoción a la convención de documentación compartida existente en el repositorio. Explica por qué lo necesitan los colaboradores y obtén aprobación cuando cambie un contrato del proyecto o equipo.

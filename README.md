@@ -1,113 +1,113 @@
 # bio-harness
 
-bio-harness is a quality-first personal Codex engineering harness. It controls context, private project state, model routing, specialized agents, reusable tools, validation, and human approval boundaries without silently turning one person's AI workflow into team policy.
+bio-harness es un harness personal de ingeniería para Codex que prioriza la calidad. Controla el contexto, el estado privado del proyecto, el enrutamiento de modelos, los agentes especializados, las herramientas reutilizables, la validación y los límites de aprobación humana sin convertir silenciosamente el flujo de trabajo de IA de una persona en una política de equipo.
 
-## Why bio-harness exists
+## Por qué existe bio-harness
 
-The model writes code. The harness decides what it sees, what it remembers, what it can touch, and how the work is validated.
+El modelo escribe código. El harness decide qué ve, qué recuerda, qué puede modificar y cómo se valida el trabajo.
 
-The objective is not token reduction by itself. Decisions follow this order:
+El objetivo no es reducir tokens por sí solo. Las decisiones siguen este orden:
 
-1. correctness;
-2. safety;
-3. task-required reasoning quality;
-4. reliability and reproducibility;
-5. then cost, tokens, context, and latency.
+1. corrección;
+2. seguridad;
+3. calidad de razonamiento requerida por la tarea;
+4. fiabilidad y reproducibilidad;
+5. luego coste, tokens, contexto y latencia.
 
-“Cheapest sufficient” means the least expensive route already demonstrated or strongly justified to meet the required quality floor. High-risk work does not start on a weaker model merely to see whether it fails.
+«Cheapest sufficient» significa la ruta menos costosa que ya haya demostrado, o esté sólidamente justificada para alcanzar, el nivel de calidad requerido. El trabajo de alto riesgo no comienza con un modelo más débil sólo para comprobar si falla.
 
-## Architecture
+## Arquitectura
 
 ```mermaid
 flowchart TD
-    B[bio-harness] --> Q[Quality router]
-    B --> C[Project context]
-    Q --> T[Validated tools]
-    Q --> D[Direct trivial work]
-    Q --> A[Specialized agents]
-    A --> L[Luna: bounded work]
-    A --> S[Sol: premium reasoning]
-    L --> V[Independent validation]
-    C --> P[Private .ai workspace]
-    C --> H[Tracked shared truth]
-    P -. cannot override .-> H
+    B[bio-harness] --> Q[Enrutador de calidad]
+    B --> C[Contexto del proyecto]
+    Q --> T[Herramientas validadas]
+    Q --> D[Trabajo trivial directo]
+    Q --> A[Agentes especializados]
+    A --> L[Luna: trabajo acotado]
+    A --> S[Sol: razonamiento premium]
+    L --> V[Validación independiente]
+    C --> P[Workspace privado .ai]
+    C --> H[Verdad compartida con seguimiento]
+    P -. no puede invalidar .-> H
 ```
 
-The source repository contains inert, reviewable staged files. Installation copies a validated subset into the global Codex runtime. Project-specific private state remains under `.ai/` in each adopted project.
+El repositorio fuente contiene archivos de staging inertes y revisables. La instalación copia un subconjunto validado al runtime global de Codex. El estado privado específico de cada proyecto permanece bajo `.ai/` en cada proyecto adoptado.
 
-See [the architecture guide](docs/architecture.md).
+Consulta la [guía de arquitectura](docs/architecture.md).
 
-## Model routing
+## Enrutamiento de modelos
 
-The validated hybrid keeps the orchestrator on GPT-5.6 Sol/medium and uses bounded Luna workers where role-specific fixtures passed.
+El híbrido validado mantiene el orquestador en GPT-5.6 Sol/medium y utiliza workers Luna acotados allí donde aprobaron fixtures específicas del rol.
 
-| Role | Model | Effort | Purpose |
+| Rol | Modelo | Esfuerzo | Propósito |
 |---|---|---|---|
-| Orchestrator | GPT-5.6 Sol | medium | Scope, route, integrate, and report |
-| Researcher | GPT-5.6 Luna | medium | Read-only repository and evidence discovery |
-| Quick implementer | GPT-5.6 Luna | low | Explicit, low-risk bounded changes |
-| Implementer | GPT-5.6 Luna | medium | Normal features and multi-file repairs |
-| Validator | GPT-5.6 Luna | low | Independent focused checks; no repair |
-| Planner | GPT-5.6 Sol | medium | Consequential architecture and migration planning |
-| Reviewer | GPT-5.6 Sol | low | Risk-justified independent review |
+| Orchestrator | GPT-5.6 Sol | medium | Delimitar, enrutar, integrar e informar |
+| Researcher | GPT-5.6 Luna | medium | Descubrimiento de repositorio y evidencia en modo read-only |
+| Quick implementer | GPT-5.6 Luna | low | Cambios explícitos, acotados y de bajo riesgo |
+| Implementer | GPT-5.6 Luna | medium | Features normales y reparaciones en varios archivos |
+| Validator | GPT-5.6 Luna | low | Comprobaciones enfocadas e independientes; sin reparar |
+| Planner | GPT-5.6 Sol | medium | Planificación de arquitectura y migraciones con consecuencias relevantes |
+| Reviewer | GPT-5.6 Sol | low | Revisión independiente justificada por el riesgo |
 
-The Luna/medium parent candidate is **blocked**. It produced three material routing regressions in the quality red-team. See [model routing](docs/model-routing.md) and [quality evidence](docs/quality-redteam.md).
+El candidato parent Luna/medium está **bloqueado**. Produjo tres regresiones materiales de enrutamiento en el quality red-team. Consulta [enrutamiento de modelos](docs/model-routing.md) y [evidencia de calidad](docs/quality-redteam.md).
 
-## Private project workspace
+## Workspace privado del proyecto
 
-Personal AI state defaults to `.ai/`, excluded through the repository-local Git exclude rather than tracked `.gitignore`. `.ai/PROJECT.md` is a compact private router, not team authority. Other private specs, state, audit notes, and tools are activated only when needed.
+El estado personal de IA usa `.ai/` de forma predeterminada y se excluye mediante el exclude local del repositorio, no mediante el `.gitignore` con seguimiento. `.ai/PROJECT.md` es un enrutador privado compacto, no una autoridad del equipo. Las demás specs privadas, el estado, las notas de auditoría y las herramientas sólo se activan cuando hacen falta.
 
-Tracked instructions, architecture, contracts, source, tests, and team documentation remain shared truth. Promotion from private findings to shared documentation is explicit and human-gated when it changes a team contract. See [private workspaces](docs/private-workspace.md).
+Las instrucciones con seguimiento, la arquitectura, los contratos, el código fuente, los tests y la documentación del equipo siguen siendo la verdad compartida. La promoción de hallazgos privados a documentación compartida es explícita y pasa por human gate cuando modifica un contrato del equipo. Consulta [workspaces privados](docs/private-workspace.md).
 
 ## Toolbox
 
-Skills teach how to work or reason. Tools perform deterministic mechanical work. bio-harness searches small manifests before regenerating non-trivial helpers, validates containment without executing code during discovery, and keeps project tools separate from the human-approved global toolbox. See [toolbox design](docs/toolbox.md).
+Las skills enseñan cómo trabajar o razonar. Las tools realizan trabajo mecánico determinista. bio-harness busca manifests pequeños antes de volver a generar helpers no triviales, valida la contención sin ejecutar código durante el descubrimiento y mantiene las herramientas del proyecto separadas de la toolbox global aprobada por el humano. Consulta el [diseño de la toolbox](docs/toolbox.md).
 
 ## project-bootstrap
 
-The bundled project-bootstrap skill inspects existing reality before proposing the smallest useful private layer. It classifies existing AI-looking paths, establishes local privacy only when safe, and never installs the full blueprint wholesale. See [project bootstrap](docs/project-bootstrap.md) and [proportional SDD](docs/sdd.md).
+La skill project-bootstrap incluida inspecciona la realidad existente antes de proponer la capa privada útil más pequeña. Clasifica rutas que parecen relacionadas con IA, establece privacidad local sólo cuando es seguro y nunca instala el blueprint completo en bloque. Consulta [bootstrap de proyectos](docs/project-bootstrap.md) y [SDD proporcional](docs/sdd.md).
 
-## Safety
+## Seguridad
 
-Material destructive, irreversible, security, migration, public-contract, global-promotion, and other authority-boundary actions follow:
+Los cambios materiales destructivos, irreversibles, de seguridad, migración, contrato público, promoción global y otros sujetos a límites de autoridad siguen:
 
 `PROPOSE → IMPACT → PREVIEW → APPROVAL → EXECUTE → VALIDATE`
 
-Repetition never grants authority. See [safety and human gates](docs/safety.md).
+La repetición nunca concede autoridad. Consulta [seguridad y human gates](docs/safety.md).
 
-## Validation
+## Validación
 
-The deterministic suite covers migration/rollback, Git-local privacy, tool containment, agent pins, context budgets, evidence freshness, and quality-gate mechanics. The outcome-based red-team compared identical parent fixtures and independently gated each worker role.
+La suite determinista cubre migración/rollback, privacidad local de Git, contención de herramientas, pins de agentes, presupuestos de contexto, vigencia de evidencia y mecanismos del quality gate. El red-team basado en resultados comparó fixtures de parent idénticas y evaluó de forma independiente cada rol worker.
 
 ```bash
 python3 -B staging/audit/validate_staging.py
 ```
 
-Current result: 38 unified tests pass, along with 67 quality fixtures, 3 toolbox tests, and 4 privacy tests. Detailed evidence remains under [`staging/audit/`](staging/audit/README.md).
+Resultado actual: pasan 38 tests unificados, junto con 67 fixtures de calidad, 3 tests de toolbox y 4 tests de privacidad. La evidencia detallada permanece en [`staging/audit/`](staging/audit/README.md).
 
-## Repository structure
+## Estructura del repositorio
 
 ```text
 bio-harness/
-├── docs/                  # User and development guides
+├── docs/                  # Guías de usuario y desarrollo
 ├── staging/
-│   ├── global/            # Installable global candidates
-│   ├── blueprint/         # Inert private-project template menu
-│   ├── migration/         # Transactional install and rollback source
-│   └── audit/             # Tests, fixtures, results, and provenance
-└── migration-execution/   # Historical V1 migration source
+│   ├── global/            # Candidatos globales instalables
+│   ├── blueprint/         # Menú inerte de plantillas privadas de proyecto
+│   ├── migration/         # Fuente de instalación y rollback transaccionales
+│   └── audit/             # Tests, fixtures, resultados y procedencia
+└── migration-execution/   # Fuente histórica de la migración V1
 ```
 
-See [repository layout](docs/repository-layout.md) for ownership and lifecycle.
+Consulta [estructura del repositorio](docs/repository-layout.md) para conocer la propiedad y el ciclo de vida.
 
-## Installation
+## Instalación
 
-Installation is hash-aware, backed up, transactional, and separate from project adoption. Read [installation and rollback](docs/installation.md) before running migration commands. The optional parent-model migration is a separate operation and remains blocked.
+La instalación tiene en cuenta los hashes, crea backups, es transaccional y está separada de la adopción de proyectos. Lee [instalación y rollback](docs/installation.md) antes de ejecutar comandos de migración. La migración opcional del modelo parent es una operación separada y sigue bloqueada.
 
-## Development
+## Desarrollo
 
-Start with the [documentation index](docs/README.md) and [development guide](docs/development.md). Modify staged source, run deterministic validation, obtain risk-proportionate review, and install only through the migration tooling.
+Comienza por el [índice de documentación](docs/README.md) y la [guía de desarrollo](docs/development.md). Modifica la fuente en staging, ejecuta validación determinista, obtén una revisión proporcional al riesgo e instala únicamente mediante las herramientas de migración.
 
-## Status
+## Estado
 
-Harness V2 hybrid is **validated** and **installed locally**. The approved active parent is GPT-5.6 Sol/medium. Luna workers are approved only for their listed bounded roles. The repository records reproducible source and audit evidence; machine backups and runtime state are intentionally excluded.
+El harness V2 híbrido está **validado** e **instalado localmente**. El parent activo aprobado es GPT-5.6 Sol/medium. Los workers Luna sólo están aprobados para los roles acotados indicados. El repositorio conserva fuente reproducible y evidencia de auditoría; los backups de la máquina y el estado de runtime se excluyen deliberadamente.

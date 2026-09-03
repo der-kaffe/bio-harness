@@ -1,51 +1,51 @@
-# Quality-first model routing
+# Enrutamiento de modelos que prioriza la calidad
 
-Routing protects the required outcome first and optimizes efficiency only afterward:
+El enrutamiento protege primero el resultado requerido y sólo después optimiza la eficiencia:
 
-1. correctness;
-2. safety;
-3. task-required reasoning quality;
-4. reliability and reproducibility;
-5. cost, tokens, context, and latency among candidates meeting the first four.
+1. corrección;
+2. seguridad;
+3. calidad de razonamiento requerida por la tarea;
+4. fiabilidad y reproducibilidad;
+5. coste, tokens, contexto y latencia entre los candidatos que satisfacen los cuatro primeros puntos.
 
-“Cheapest sufficient” therefore means cheapest among quality-qualified candidates. It is not weak-model-first experimentation.
+Por tanto, «cheapest sufficient» significa el más barato entre los candidatos que cumplen el nivel de calidad. No significa experimentar primero con modelos débiles.
 
-## Validated hybrid catalog
+## Catálogo híbrido validado
 
-| Role | Model | Effort | Sandbox | Responsibility |
+| Rol | Modelo | Esfuerzo | Sandbox | Responsabilidad |
 |---|---|---|---|---|
-| Orchestrator | GPT-5.6 Sol | medium | workspace-write | Interpret, route, integrate, gate, and report |
-| Researcher | GPT-5.6 Luna | medium | read-only | Multi-file discovery, tracing, and compact evidence |
-| Quick implementer | GPT-5.6 Luna | low | workspace-write | Explicit low-risk bounded changes |
-| Implementer | GPT-5.6 Luna | medium | workspace-write | Normal features, multi-file fixes, and focused repair |
-| Validator | GPT-5.6 Luna | low | workspace-write | Run assigned checks without repairing source |
-| Planner | GPT-5.6 Sol | medium | read-only | Consequential planning and architecture |
-| Reviewer | GPT-5.6 Sol | low | read-only | Risk-justified independent review |
+| Orchestrator | GPT-5.6 Sol | medium | workspace-write | Interpretar, enrutar, integrar, aplicar gates e informar |
+| Researcher | GPT-5.6 Luna | medium | read-only | Descubrimiento en varios archivos, trazado y evidencia compacta |
+| Quick implementer | GPT-5.6 Luna | low | workspace-write | Cambios explícitos, acotados y de bajo riesgo |
+| Implementer | GPT-5.6 Luna | medium | workspace-write | Features normales, correcciones en varios archivos y reparación enfocada |
+| Validator | GPT-5.6 Luna | low | workspace-write | Ejecutar las comprobaciones asignadas sin reparar la fuente |
+| Planner | GPT-5.6 Sol | medium | read-only | Planificación y arquitectura con consecuencias relevantes |
+| Reviewer | GPT-5.6 Sol | low | read-only | Revisión independiente justificada por el riesgo |
 
-Validator uses workspace-write because common checks create caches and build artifacts. Its contract forbids source/config edits and requires before/after status evidence.
+Validator usa workspace-write porque las comprobaciones habituales crean cachés y artefactos de build. Su contrato prohíbe editar fuente/configuración y exige evidencia del estado anterior y posterior.
 
-## Decision path
+## Ruta de decisión
 
 ```mermaid
 flowchart TD
-    T[Task] --> A[Assess quality, risk, ambiguity, and authority]
-    A --> M{Validated deterministic semantic match?}
-    M -->|Yes| TOOL[Use tool]
-    M -->|No| X{Truly trivial and reliable?}
-    X -->|Yes| DIRECT[Parent direct]
-    X -->|No| R{Consequential predicted risk?}
-    R -->|No| L[Bounded Luna role]
-    R -->|Yes| S[Sol premium role]
-    A --> H{Destructive or ambiguous authority?}
-    H -->|Yes| G[Human gate]
+    T[Tarea] --> A[Evaluar calidad, riesgo, ambigüedad y autoridad]
+    A --> M{¿Coincidencia semántica con herramienta determinista validada?}
+    M -->|Sí| TOOL[Usar herramienta]
+    M -->|No| X{¿Realmente trivial y fiable?}
+    X -->|Sí| DIRECT[Ejecución directa del parent]
+    X -->|No| R{¿Riesgo previsto relevante?}
+    R -->|No| L[Rol Luna acotado]
+    R -->|Sí| S[Rol Sol premium]
+    A --> H{¿Autoridad destructiva o ambigua?}
+    H -->|Sí| G[Human gate]
 ```
 
-Project tools take precedence over global tools only for the same semantic responsibility. Similar names or tags do not establish compatibility.
+Las herramientas del proyecto tienen prioridad sobre las globales sólo para la misma responsabilidad semántica. Los nombres o tags parecidos no demuestran compatibilidad.
 
-## Escalation and context
+## Escalamiento y contexto
 
-Escalation can be predictive. Migrations, security boundaries, durable data, concurrency, public APIs, destructive changes, and consequential architecture may route directly to Sol. Unexpected complexity can also escalate after cheaper work preserves and reports its evidence; the task is not blindly restarted.
+El escalamiento puede ser predictivo. Las migraciones, los límites de seguridad, los datos duraderos, la concurrencia, las API públicas, los cambios destructivos y la arquitectura con consecuencias relevantes pueden enrutarse directamente a Sol. Una complejidad inesperada también puede provocar un escalamiento después de que el trabajo más barato conserve e informe su evidencia; la tarea no se reinicia a ciegas.
 
-Each subagent receives its exact responsibility, required contracts, constraints, ownership, human-gate boundary, and relevant prior failures. Whole-conversation copying is avoided unless compression would remove necessary meaning. Parallel work requires genuinely independent read concerns or explicit non-overlapping write ownership.
+Cada subagente recibe su responsabilidad exacta, contratos requeridos, restricciones, ownership, límite de human gate y fallos anteriores pertinentes. Se evita copiar toda la conversación salvo que comprimirla elimine significado necesario. El trabajo paralelo requiere lecturas genuinamente independientes u ownership de escritura explícito y no solapado.
 
-The on-demand runtime policy is sourced from [`staging/global/codex/routing/MODEL_ROUTING.md`](../staging/global/codex/routing/MODEL_ROUTING.md).
+La política de runtime bajo demanda procede de [`staging/global/codex/routing/MODEL_ROUTING.md`](../staging/global/codex/routing/MODEL_ROUTING.md).

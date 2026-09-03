@@ -1,25 +1,25 @@
-# Future memory strategy
+# Estrategia futura de memory
 
-The candidate does not enable memory.
+El candidato no habilita memory.
 
-## Suitable memory
+## Contenido adecuado para memory
 
-- Stable personal preferences that apply across projects.
-- Repeated, low-risk interaction preferences that are expensive to restate.
-- Auxiliary reminders whose source and fallibility are clear.
+- Preferencias personales estables que se aplican entre proyectos.
+- Preferencias de interacción repetidas y de bajo riesgo que resulta costoso volver a explicar.
+- Recordatorios auxiliares cuya fuente y falibilidad estén claras.
 
-## Unsuitable memory
+## Contenido inadecuado para memory
 
-- Project facts, accepted requirements, specifications, or decisions.
-- Current task/run state, test results, incident state, or release status.
-- Secrets, credentials, personal data without a defined need, or copied external facts.
-- Proposed decisions presented as accepted truth.
-- Any rule that must apply deterministically.
+- Hechos del proyecto, requisitos aceptados, especificaciones o decisiones.
+- Tarea/run state actual, resultados de tests, estado de incidentes o estado de releases.
+- Secrets, credenciales, datos personales sin una necesidad definida o hechos externos copiados.
+- Decisiones propuestas presentadas como verdad aceptada.
+- Cualquier regla que deba aplicarse de forma determinista.
 
-## Contradiction handling
+## Gestión de contradicciones
 
-Versioned authoritative project sources outrank memory. Current repository evidence establishes what exists and may reveal drift; it does not silently override the approved target. If memory conflicts with an authoritative source, ignore it for the decision, report the conflict when material, and correct/remove the stale memory through an explicit control rather than rewriting project truth.
+Las fuentes autoritativas y versionadas del proyecto prevalecen sobre memory. La evidencia actual del repositorio establece lo que existe y puede revelar drift; no invalida silenciosamente el target aprobado. Si memory entra en conflicto con una fuente autoritativa, ignórala para la decisión, informa el conflicto cuando sea material y corrige/elimina la memory obsoleta mediante un control explícito en lugar de reescribir la verdad del proyecto.
 
-## Activation criteria
+## Criterios de activación
 
-Evaluate activation only after observing real cross-project use. Require evidence of repeated useful recall, a review of local storage/privacy, clear per-chat controls, an inspection/removal process, and tests that stale memory does not override project context. Start narrowly and retain the ability to disable generation and use independently.
+Evalúa la activación sólo después de observar un uso real entre proyectos. Exige evidencia de recall útil repetido, una revisión del almacenamiento/privacidad local, controles claros por chat, un proceso de inspección/eliminación y tests que demuestren que la memory obsoleta no invalida el contexto del proyecto. Comienza con un alcance estrecho y conserva la capacidad de deshabilitar de forma independiente la generación y el uso.
